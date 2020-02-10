@@ -1,0 +1,17 @@
+export enum AppRoute {
+    AUTH = 'Auth',
+    SIGN_IN = 'Sign In',
+    SIGN_UP = 'Sign Up',
+    RESET_PASSWORD = 'Reset Passrord',
+    HOME = 'Home',
+    MAIN = 'Main',
+    ORDER_HISTORY = 'Order History',
+    SETTINGS = 'Settings',
+    BEER_LIST = 'Beer List',
+    TODO = 'ToDo',
+    TODO_IN_PROGRESS = 'ToDo In Progress',
+    TODO_DONE = 'ToDo Done',
+    TODO_DETAILS = 'ToDo Details',
+    PROFILE = 'Profile',
+    ABOUT = 'About',
+}
