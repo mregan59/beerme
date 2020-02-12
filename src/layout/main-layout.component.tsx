@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { TouchableOpacity, Platform } from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
+import { TouchableOpacity, Platform, View } from 'react-native';
 import {
     Layout,
     Divider,
@@ -10,6 +9,11 @@ import {
     TopNavigationAction,
 } from '@ui-kitten/components';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import {
+    SafeAreaLayout,
+    SaveAreaInset,
+    SafeAreaLayoutElement,
+} from '../navigation/safe-area-layout';
 
 export const MainLayout = props => {
     const statusBarHeight = getStatusBarHeight();
@@ -48,32 +52,35 @@ export const MainLayout = props => {
 
     if (props.safeArea) {
         return (
-            <SafeAreaView style={{ flex: 1, paddingTop: statusBarHeight }}>
-                {header()}
+            <SafeAreaLayout insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}>
+                {props.showHeader && header()}
                 <Layout
                     level={props.level}
                     style={{
                         flex: 1,
+                        height: '100%',
                         padding: props.padding ? 15 : 0,
                     }}
                 >
                     {props.children}
                 </Layout>
-            </SafeAreaView>
+            </SafeAreaLayout>
         );
     } else {
         return (
             <Layout
                 style={{
                     flex: 1,
-                    backgroundColor: 'hotpink',
-                    paddingTop: statusBarHeight,
                 }}
             >
-                {header()}
+                {props.showHeader && header()}
                 <Layout
                     level={props.level}
-                    style={{ flex: 1, padding: props.padding ? 15 : 0 }}
+                    style={{
+                        flex: 1,
+                        height: '100%',
+                        padding: props.padding ? 15 : 0,
+                    }}
                 >
                     {props.children}
                 </Layout>
@@ -83,6 +90,8 @@ export const MainLayout = props => {
 };
 
 MainLayout.defaultProps = {
-    safeArea: true,
+    safeArea: false,
     level: '1',
+    padding: true,
+    showHeader: true,
 };

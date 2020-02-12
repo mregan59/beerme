@@ -8,6 +8,7 @@ export enum AppRoute {
     ORDER_HISTORY = 'Order History',
     SETTINGS = 'Settings',
     BEER_LIST = 'Beer List',
+    BEER_DETAILS = 'Beer Details',
     TODO = 'ToDo',
     TODO_IN_PROGRESS = 'ToDo In Progress',
     TODO_DONE = 'ToDo Done',

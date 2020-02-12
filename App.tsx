@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
@@ -10,8 +7,6 @@ import { mapping, light as lightTheme } from '@eva-design/eva';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/navigation/app.navigator';
 import { AppRoute } from './src/navigation/app-routes';
-
-const Stack = createStackNavigator();
 
 import * as firebase from 'firebase';
 import { Loading } from './src/loading';
@@ -34,7 +29,7 @@ export default function App(props) {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setInitialRoute(user ? AppRoute.HOME : AppRoute.AUTH);
+            setInitialRoute(user ? AppRoute.MAIN : AppRoute.MAIN);
         });
     }, []);
     return (

@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, Platform } from 'react-native';
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context';
 import { Layout, LayoutElement, LayoutProps } from '@ui-kitten/components';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export enum SaveAreaInset {
     TOP = 'top',
@@ -26,6 +27,11 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
             case SaveAreaInset.BOTTOM:
                 return { paddingBottom: safeAreaInsets.bottom };
             case SaveAreaInset.TOP:
+                // const paddingTop =
+                //     Platform.OS === 'android'
+                //         ? getStatusBarHeight()
+                //         : safeAreaInsets.top;
+                // console.log(paddingTop);
                 return { paddingTop: safeAreaInsets.top };
         }
     };

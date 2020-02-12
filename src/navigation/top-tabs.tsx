@@ -1,26 +1,28 @@
 import React from 'react';
 import {
-    BottomNavigation,
-    BottomNavigationTab,
+    TabBar,
+    TabView,
+    Tab,
     Divider,
-    BottomNavigationTabElement,
+    TabElement,
 } from '@ui-kitten/components';
 import {
     SafeAreaLayout,
-    SafeAreaLayoutElement,
     SaveAreaInset,
+    SafeAreaLayoutElement,
 } from './safe-area-layout';
+import { Toolbar } from '../components/toolbar';
 
-export const MainTabBar = (props): SafeAreaLayoutElement => {
-    const onSelect = (index: number): void => {
+export const TopTabs = (props): SafeAreaLayoutElement => {
+    const onTabSelect = (index: number): void => {
         const selectedTabRoute: string = props.state.routeNames[index];
         props.navigation.navigate(selectedTabRoute);
     };
 
-    const createNavigationTabForRoute = (route): BottomNavigationTabElement => {
+    const createNavigationTabForRoute = (route): TabElement => {
         const { options } = props.descriptors[route.key];
         return (
-            <BottomNavigationTab
+            <Tab
                 key={route.key}
                 // title={options.title}
                 icon={options.tabBarIcon}
@@ -29,14 +31,16 @@ export const MainTabBar = (props): SafeAreaLayoutElement => {
     };
 
     return (
-        <SafeAreaLayout insets={SaveAreaInset.BOTTOM}>
-            <BottomNavigation
-                appearance="noIndicator"
+        <SafeAreaLayout insets={SaveAreaInset.TOP}>
+            {/* <Toolbar title="React Navigation Ex 🐱" /> */}
+            <TabView
+                tabBarStyle={{ height: 56 }}
+                indicatorStyle={{ height: 0 }}
                 selectedIndex={props.state.index}
-                onSelect={onSelect}
+                onSelect={onTabSelect}
             >
                 {props.state.routes.map(createNavigationTabForRoute)}
-            </BottomNavigation>
+            </TabView>
             <Divider />
         </SafeAreaLayout>
     );

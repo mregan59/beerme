@@ -64,3 +64,11 @@ export const SearchIcon = (style): IconElement => (
 export const PlusIcon = (style): IconElement => (
     <Icon {...style} name="plus-outline" />
 );
+
+export const OrderIcon = (style): IconElement => (
+    <Icon {...style} name="calendar-outline" />
+);
+
+export const SettingsIcon = (style): IconElement => (
+    <Icon {...style} name="settings-outline" />
+);

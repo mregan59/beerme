@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, Button, Layout, Datepicker, Icon } from '@ui-kitten/components';
+import { Text, Button, Layout, Icon } from '@ui-kitten/components';
 import { MainLayout } from '../layout/main-layout.component';
 import { AppRoute } from '../navigation/app-routes';
-
-const FacebookIcon = style => <Icon name="facebook" {...style} />;
+import { BeerList } from '../beer/beer-list';
+import { Checkout } from '../checkout/checkout.component';
 
 export const Home = props => {
-    const [date, setDate] = useState(new Date());
     return (
-        <MainLayout {...props}>
-            <Layout level="4">
-                <Text>Home</Text>
-                <Button
-                    onPress={() =>
-                        props.navigation.navigate(AppRoute.BEER_LIST)
-                    }
-                >
-                    Go to Details
-                </Button>
-                <Button icon={FacebookIcon}>Login with Facebook</Button>
-                <Datepicker date={date} onSelect={setDate} />
-            </Layout>
-        </MainLayout>
+        <View style={{ flex: 1, width: '100%', height: '100%' }}>
+            <MainLayout safeArea={false} showHeader={false} {...props}>
+                <BeerList></BeerList>
+            </MainLayout>
+            <Checkout></Checkout>
+        </View>
     );
 };
