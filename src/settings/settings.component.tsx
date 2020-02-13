@@ -4,7 +4,7 @@ import { MainLayout } from '../layout';
 
 export const Settings = props => {
     return (
-        <MainLayout {...props}>
+        <MainLayout showBack {...props}>
             <Text>Settings</Text>
         </MainLayout>
     );

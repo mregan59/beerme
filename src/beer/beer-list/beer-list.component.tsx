@@ -6,8 +6,10 @@ import { BeerItem } from '../beer-item';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import { AppRoute } from '../../navigation/app-routes';
+import { useNavigation } from '@react-navigation/native';
 
 export const BeerList = props => {
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
     const [beers, setBeers] = useState([]);
     const beersRef = firebase.firestore().collection('beers');
@@ -35,7 +37,7 @@ export const BeerList = props => {
     }, []);
 
     const navigateToBeer = beer => {
-        props.navigation.push(AppRoute.BEER_DETAILS, { beer: beer });
+        navigation.navigate(AppRoute.BEER_DETAILS, { beer: beer });
     };
     const items = beers.map(beer => {
         return (

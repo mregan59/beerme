@@ -11,7 +11,7 @@ import {
     SaveAreaInset,
 } from './safe-area-layout';
 
-export const MainTabBar = (props): SafeAreaLayoutElement => {
+export const BottomTabs = (props): SafeAreaLayoutElement => {
     const onSelect = (index: number): void => {
         const selectedTabRoute: string = props.state.routeNames[index];
         props.navigation.navigate(selectedTabRoute);

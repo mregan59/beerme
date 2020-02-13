@@ -15,6 +15,7 @@ import {
     SafeAreaLayoutElement,
 } from '../navigation/safe-area-layout';
 import { variables } from '../shared/variables';
+import { BackIcon } from '../assets/icons';
 
 export const MainLayout = props => {
     const statusBarHeight = getStatusBarHeight();
@@ -31,29 +32,30 @@ export const MainLayout = props => {
     //         : scene.route.routeName;
 
     const backAction = () => (
-        <TouchableOpacity onPress={navigateBack}>
-            <Text>Back</Text>
-        </TouchableOpacity>
-
-        // <TopNavigationAction icon={BackIcon} onPress={navigateBack} />
+        <TopNavigationAction onPress={navigateBack} icon={BackIcon} />
     );
     const header = () => {
         return (
             <React.Fragment>
                 <TopNavigation
-                    title={props.route.name}
+                    title={props.showTitle && props.route.name}
                     alignment="center"
                     leftControl={props.showBack && backAction()}
                     rightControls={props.rightControl && props.rightControl()}
                 />
-                <Divider />
+                {props.showTitle && <Divider />}
             </React.Fragment>
         );
     };
 
     if (props.safeArea) {
         return (
-            <SafeAreaLayout insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}>
+            <SafeAreaLayout
+                style={{
+                    flex: 1,
+                }}
+                insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}
+            >
                 {props.showHeader && header()}
                 <Layout
                     level={props.level}
@@ -91,8 +93,9 @@ export const MainLayout = props => {
 };
 
 MainLayout.defaultProps = {
-    safeArea: false,
+    safeArea: true,
     level: '1',
     padding: true,
     showHeader: true,
+    showTitle: true,
 };

@@ -1,1 +1,1 @@
-export { Home } from './home.component';
+export { ThemedHome as Home } from './home.styles';
