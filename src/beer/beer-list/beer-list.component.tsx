@@ -47,27 +47,5 @@ export const BeerList = props => {
         );
     });
 
-    return (
-        <Layout level="3" style={{ width: '100%', flex: 1 }}>
-            {items}
-            <FlexBox
-                style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                }}
-                column
-            >
-                <FlexBox row justifybetween flex1>
-                    <Text>Date</Text>
-                    <Text>Nov 16, 2020</Text>
-                </FlexBox>
-                <FlexBox row justifybetween flex1>
-                    <Text>Total</Text>
-                    <Text>$300</Text>
-                </FlexBox>
-            </FlexBox>
-        </Layout>
-    );
+    return <Layout style={{ width: '100%', flex: 1 }}>{items}</Layout>;
 };

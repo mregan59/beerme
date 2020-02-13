@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from '@ui-kitten/components';
+import { View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export const FlexBox = props => {
@@ -54,9 +54,9 @@ export const FlexBox = props => {
     } = props;
     //TODO figure out way to pass in element
     return (
-        <Layout {...other} style={flexStyle}>
+        <View {...other} style={flexStyle}>
             {props.children}
-        </Layout>
+        </View>
     );
 };
 

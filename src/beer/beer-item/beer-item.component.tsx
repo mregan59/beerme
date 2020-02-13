@@ -3,11 +3,12 @@ import { Layout, Text, Button } from '@ui-kitten/components';
 import { FlexBox, TouchableFlexBox } from '../../components/flexbox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View } from 'react-native';
+import { PlusIcon } from '../../assets/icons';
 
 export const BeerItem = props => {
     const [open, setOpen] = useState(false);
     const [quantity, setQuantity] = useState(0);
-    const { beer } = props;
+    const { beer, themedStyle } = props;
 
     const toggle = () => {
         setOpen(!open);
@@ -18,55 +19,53 @@ export const BeerItem = props => {
         return (
             <TouchableOpacity
                 style={[
-                    {
-                        borderColor: 'black',
-                        borderWidth: 1,
-                        padding: 10,
-                        marginHorizontal: 5,
-                    },
-                    quantity == index && { backgroundColor: 'green' },
+                    themedStyle.quantity,
+                    quantity == index && themedStyle.quantitySelected,
                 ]}
                 onPress={() => setQuantity(index)}
             >
-                <View>
-                    <Text>{index + 1}</Text>
-                </View>
+                <FlexBox justifycenter aligncenter flex1>
+                    <Text
+                        appearance={
+                            quantity == index ? 'alternative' : 'default'
+                        }
+                    >
+                        {index + 1}
+                    </Text>
+                </FlexBox>
             </TouchableOpacity>
         );
     });
 
     return (
-        <FlexBox style={{ marginVertical: 5, padding: 0 }}>
+        <Layout level="3" style={themedStyle.container}>
             <FlexBox w100 row aligncenter>
                 <TouchableFlexBox
                     row
                     justifybetween
                     aligncenter
-                    style={{
-                        padding: 0,
-                        marginRight: 0,
-                        width: 280,
-                    }}
+                    style={themedStyle.content}
                     onPress={props.onSelect}
                 >
                     <Text>{beer.name}</Text>
-                    <Layout
-                        level="4"
-                        style={{
-                            padding: 6,
-                            marginRight: 10,
-                        }}
-                    >
-                        <Text>${beer.price}</Text>
+                    <Layout style={themedStyle.price}>
+                        <Text appearance="alternative">${beer.price}</Text>
                     </Layout>
                 </TouchableFlexBox>
-                <View>
-                    <Button onPress={toggle} status="primary" status="danger">
-                        +
-                    </Button>
+                <View style={themedStyle.addBtnContainer}>
+                    <Button
+                        appearance="outline"
+                        icon={PlusIcon}
+                        onPress={toggle}
+                        status="basic"
+                    ></Button>
                 </View>
             </FlexBox>
-            {open && <FlexBox row>{quantities}</FlexBox>}
-        </FlexBox>
+            {open && (
+                <FlexBox row style={themedStyle.quantityContainer}>
+                    {quantities}
+                </FlexBox>
+            )}
+        </Layout>
     );
 };

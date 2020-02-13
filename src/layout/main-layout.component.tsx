@@ -14,6 +14,7 @@ import {
     SaveAreaInset,
     SafeAreaLayoutElement,
 } from '../navigation/safe-area-layout';
+import { variables } from '../shared/variables';
 
 export const MainLayout = props => {
     const statusBarHeight = getStatusBarHeight();
@@ -59,7 +60,7 @@ export const MainLayout = props => {
                     style={{
                         flex: 1,
                         height: '100%',
-                        padding: props.padding ? 15 : 0,
+                        padding: props.padding ? variables.sideMargin : 0,
                     }}
                 >
                     {props.children}

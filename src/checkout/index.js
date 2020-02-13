@@ -1,1 +1,1 @@
-export { Checkout } from './checkout.component';
+export { ThemedCheckout as Checkout } from './checkout.styles';

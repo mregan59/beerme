@@ -1,1 +1,1 @@
-export { BeerItem } from './beer-item.component';
+export { ThemedBeerItem as BeerItem } from './beer-item.styles';

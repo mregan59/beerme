@@ -1,25 +1,21 @@
-import React, { useRef } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
-import {
-    Button,
-    Divider,
-    Layout,
-    TopNavigation,
-    Text,
-    Icon,
-} from '@ui-kitten/components';
+import React, { useRef, useState } from 'react';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Text, Button } from '@ui-kitten/components';
 import Animated from 'react-native-reanimated';
 
 import BottomSheet from 'reanimated-bottom-sheet';
 import { FlexBox } from '../components/flexbox';
 
 const AnimatedView = Animated.View;
-var { height, width } = Dimensions.get('window');
-export const Checkout = () => {
+
+export const Checkout = props => {
     let bottomSheetRef = useRef(null);
     let fall = new Animated.Value(1);
+    const [allowGestures, setAllowGestures] = useState(false);
 
-    console.log(fall);
+    const { themedStyle } = props;
+
     const renderContent = () => {
         const animatedScale = Animated.interpolate(fall, {
             inputRange: [0, 1], //0 is open //1 is closed
@@ -27,54 +23,61 @@ export const Checkout = () => {
             //extrapolate: Animated.Extrapolate.CLAMP,
         });
         return (
-            <FlexBox style={styles.content} justifycenter aligncenter>
-                <AnimatedView style={{ transform: [{ scale: animatedScale }] }}>
-                    <Text>HContent</Text>
-                    <Text>HContent</Text>
-                    <Text>HContent</Text>
-                    <Text>HContent</Text>
-                </AnimatedView>
+            <FlexBox style={themedStyle.content} justifycenter aligncenter>
+                <AnimatedView
+                    style={{ transform: [{ scale: animatedScale }] }}
+                ></AnimatedView>
             </FlexBox>
         );
     };
 
+    const openCheckout = () => {
+        //snapPoint index
+        bottomSheetRef.current.snapTo(2);
+    };
+
+    const onOpenEnd = () => {
+        setAllowGestures(true);
+    };
+    const onCloseEnd = () => {
+        setAllowGestures(false);
+    };
+
     const renderHeader = () => (
-        <FlexBox style={styles.header}>
-            <Text>This is the header</Text>
+        <FlexBox row justifyend aligncenter style={themedStyle.header}>
+            <FlexBox style={themedStyle.total} row justifybetween aligncenter>
+                <Text category="s2" appearance="alternative">
+                    TOTAL
+                </Text>
+                <Text
+                    category="s2"
+                    style={{ marginHorizontal: 16 }}
+                    appearance="alternative"
+                >
+                    6 kegs
+                </Text>
+                <Text category="s2" appearance="alternative">
+                    $300
+                </Text>
+            </FlexBox>
+            <Button size="large" onPress={openCheckout}>
+                View Order
+            </Button>
         </FlexBox>
     );
     return (
-        <View style={styles.container}>
+        <View style={themedStyle.container}>
             <BottomSheet
+                enabledGestureInteraction={allowGestures}
                 ref={bottomSheetRef}
                 initialSnap={0}
                 snapPoints={[100, 450, 450]}
                 renderContent={renderContent}
                 renderHeader={renderHeader}
                 callbackNode={fall}
+                onOpenEnd={onOpenEnd}
+                onCloseEnd={onCloseEnd}
             />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: width,
-        // padding: 50,
-        backgroundColor: 'hotpink',
-    },
-    header: {
-        backgroundColor: 'yellow',
-        height: 100,
-        width: width,
-    },
-    content: {
-        backgroundColor: 'green',
-        // height: '100%',
-        //alignItems: 'center',
-        height: 450,
-        overflow: 'visible',
-        minWidth: width,
-    },
-});

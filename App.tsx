@@ -10,6 +10,7 @@ import { AppRoute } from './src/navigation/app-routes';
 
 import * as firebase from 'firebase';
 import { Loading } from './src/loading';
+import customMapping from './src/shared/custom-mapping.json';
 var config = {
     apiKey: 'AIzaSyDV5cPugR7MOmAo09cd70ffqK-heAQLhvk',
     authDomain: 'six-brothers.firebaseapp.com',
@@ -35,7 +36,11 @@ export default function App(props) {
     return (
         <React.Fragment>
             <IconRegistry icons={EvaIconsPack} />
-            <ApplicationProvider mapping={mapping} theme={lightTheme}>
+            <ApplicationProvider
+                mapping={mapping}
+                theme={lightTheme}
+                customMapping={customMapping}
+            >
                 <SafeAreaProvider>
                     {initialRoute ? (
                         <NavigationContainer>
