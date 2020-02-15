@@ -18,6 +18,7 @@ export const BeerItem = props => {
     const quantities = [...Array(8)].map((num, index) => {
         return (
             <TouchableOpacity
+                key={index}
                 style={[
                     themedStyle.quantity,
                     quantity == index && themedStyle.quantitySelected,

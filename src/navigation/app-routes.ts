@@ -9,10 +9,16 @@ export enum AppRoute {
     SETTINGS = 'Settings',
     BEER_LIST = 'Beer List',
     BEER_DETAILS = 'Beer Details',
+    ADMIN = 'Admin',
     TODO = 'ToDo',
     TODO_IN_PROGRESS = 'ToDo In Progress',
     TODO_DONE = 'ToDo Done',
     TODO_DETAILS = 'ToDo Details',
     PROFILE = 'Profile',
     ABOUT = 'About',
+
+    ADMIN_DASHBOARD = 'Dashboard',
+    ADMIN_BEER_LIST = 'Beer List',
+    ADMIN_BEER_DETAILS = 'Beer Details',
+    ADMIN_BEER_EDIT = 'Beer Edit',
 }

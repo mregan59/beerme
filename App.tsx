@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/navigation/app.navigator';
 import { AppRoute } from './src/navigation/app-routes';
+import { Provider } from 'react-redux';
+import { store } from './configureStore';
 
 import * as firebase from 'firebase';
 import { Loading } from './src/loading';
@@ -30,27 +31,29 @@ export default function App(props) {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setInitialRoute(user ? AppRoute.MAIN : AppRoute.MAIN);
+            setInitialRoute(user ? AppRoute.MAIN : AppRoute.AUTH);
         });
     }, []);
     return (
-        <React.Fragment>
-            <IconRegistry icons={EvaIconsPack} />
-            <ApplicationProvider
-                mapping={mapping}
-                theme={lightTheme}
-                customMapping={customMapping}
-            >
-                <SafeAreaProvider>
-                    {initialRoute ? (
-                        <NavigationContainer>
-                            <AppNavigator initialRouteName={initialRoute} />
-                        </NavigationContainer>
-                    ) : (
-                        <Loading></Loading>
-                    )}
-                </SafeAreaProvider>
-            </ApplicationProvider>
-        </React.Fragment>
+        <Provider store={store}>
+            <React.Fragment>
+                <IconRegistry icons={EvaIconsPack} />
+                <ApplicationProvider
+                    mapping={mapping}
+                    theme={lightTheme}
+                    customMapping={customMapping}
+                >
+                    <SafeAreaProvider>
+                        {initialRoute ? (
+                            <NavigationContainer>
+                                <AppNavigator initialRouteName={initialRoute} />
+                            </NavigationContainer>
+                        ) : (
+                            <Loading></Loading>
+                        )}
+                    </SafeAreaProvider>
+                </ApplicationProvider>
+            </React.Fragment>
+        </Provider>
     );
 }

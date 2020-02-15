@@ -12,3 +12,7 @@ export const dimensions = {
     innerWidth: width - variables.sideMargin * 2,
     fullWidth: width,
 };
+
+export const spacing = num => {
+    return num * 8;
+};

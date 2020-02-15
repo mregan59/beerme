@@ -11,13 +11,16 @@ import { MainLayout } from '../layout';
 import { AppRoute } from '../navigation/app-routes';
 import { BeerList } from '../beer/beer-list';
 import { Checkout } from '../checkout';
-import { SettingsIcon } from '../assets/icons';
+import { SettingsIcon, PersonIcon } from '../assets/icons';
 import { FlexBox } from '../components/flexbox';
 
 export const Home = props => {
     const { themedStyle } = props;
     const navigateToSettings = () => {
-        props.navigation.navigate('Settings');
+        props.navigation.navigate(AppRoute.SETTINGS);
+    };
+    const navigateToAdmin = () => {
+        props.navigation.navigate(AppRoute.ADMIN);
     };
     const renderRightControl = () => {
         return (
@@ -25,6 +28,11 @@ export const Home = props => {
                 onPress={navigateToSettings}
                 icon={SettingsIcon}
             />
+        );
+    };
+    const renderLeftControl = () => {
+        return (
+            <TopNavigationAction onPress={navigateToAdmin} icon={PersonIcon} />
         );
     };
 
@@ -37,6 +45,7 @@ export const Home = props => {
                 safeArea={true}
                 showTitle={false}
                 rightControl={renderRightControl}
+                leftControl={renderLeftControl}
                 {...props}
             >
                 <FlexBox row justifybetween style={themedStyle.dateContainer}>

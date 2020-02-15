@@ -35,12 +35,16 @@ export const MainLayout = props => {
         <TopNavigationAction onPress={navigateBack} icon={BackIcon} />
     );
     const header = () => {
+        console.log(props.leftControl);
         return (
             <React.Fragment>
                 <TopNavigation
                     title={props.showTitle && props.route.name}
                     alignment="center"
-                    leftControl={props.showBack && backAction()}
+                    leftControl={
+                        (props.leftControl && props.leftControl()) ||
+                        (props.showBack && backAction())
+                    }
                     rightControls={props.rightControl && props.rightControl()}
                 />
                 {props.showTitle && <Divider />}
