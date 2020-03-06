@@ -13,6 +13,7 @@ import { BeerList } from '../beer/beer-list';
 import { Checkout } from '../checkout';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
 import { FlexBox } from '../components/flexbox';
+import { Spacer } from '../components/spacer';
 
 export const Home = props => {
     const { themedStyle } = props;
@@ -43,25 +44,16 @@ export const Home = props => {
         <View style={styles.container}>
             <MainLayout
                 safeArea={true}
+                padding={null}
                 showTitle={false}
                 rightControl={renderRightControl}
                 leftControl={renderLeftControl}
                 {...props}
             >
                 <FlexBox row justifybetween style={themedStyle.dateContainer}>
-                    <View>
-                        <Text
-                            appearance="alternative"
-                            style={{ marginBottom: 8 }}
-                            category="label"
-                        >
-                            Your Delivery Date
-                        </Text>
-                        <Text appearance="alternative" category="h4">
-                            Feb 16, 2020
-                        </Text>
-                    </View>
-                    <Button onPress={editDate}>Edit</Button>
+                    <Text category="label">YOUR DELIVERY DATE</Text>
+                    <Spacer height={1}></Spacer>
+                    <Text category="h3">Feb 16, 2020</Text>
                 </FlexBox>
                 <BeerList></BeerList>
             </MainLayout>
@@ -73,7 +65,6 @@ export const Home = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
         width: '100%',
         height: '100%',
     },

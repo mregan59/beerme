@@ -4,9 +4,9 @@ import { Home } from './home.component';
 
 export const ThemedHome = withStyles(Home, theme => ({
     dateContainer: {
-        backgroundColor: theme['color-primary-default'],
+        // backgroundColor: theme['color-primary-default'],
         padding: variables.sideMargin,
-        borderRadius: 5,
+        borderRadius: variables.borderRadius2,
         marginBottom: 5,
     },
     header: {

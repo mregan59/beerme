@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import { MainLayout } from '../../layout';
 import { Layout, Text, Card, Button } from '@ui-kitten/components';
 import { FlexBox } from '../../components/flexbox';
@@ -14,11 +15,12 @@ export const BeerList = props => {
     const [beers, setBeers] = useState([]);
     const beersRef = firebase.firestore().collection('beers');
 
+    const { themedStyle } = props;
+
     useEffect(() => {
         beersRef.onSnapshot(querySnapshot => {
             const list = [];
             querySnapshot.forEach(doc => {
-                console.log(doc);
                 const { name, description, price, quantity } = doc.data();
                 list.push({
                     id: doc.id,
@@ -49,5 +51,9 @@ export const BeerList = props => {
         );
     });
 
-    return <Layout style={{ width: '100%', flex: 1 }}>{items}</Layout>;
+    return (
+        <Layout level="3" style={themedStyle.container}>
+            <ScrollView style={themedStyle.scrollView}>{items}</ScrollView>
+        </Layout>
+    );
 };

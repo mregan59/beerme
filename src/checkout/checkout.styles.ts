@@ -4,8 +4,9 @@ import { Checkout } from './checkout.component';
 
 export const ThemedCheckout = withStyles(Checkout, theme => ({
     container: {
-        flex: 1,
+        height: 60, //TODO give this a less extra height
         width: dimensions.fullWidth,
+        backgroundColor: 'purple',
     },
     header: {
         backgroundColor: theme['color-primary-focus'],

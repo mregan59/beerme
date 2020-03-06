@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, ViewStyle, Platform } from 'react-native';
+import { StyleProp, ViewStyle, Platform, Dimensions } from 'react-native';
 import { EdgeInsets, useSafeArea } from 'react-native-safe-area-context';
 import { Layout, LayoutElement, LayoutProps } from '@ui-kitten/components';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -41,5 +41,14 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
         return React.Children.map(insets, toStyleProp);
     };
 
-    return <Layout {...layoutProps} style={[style, createInsets()]} />;
+    return (
+        <Layout
+            {...layoutProps}
+            style={[
+                style,
+                createInsets(),
+                { flex: 1 }, //if set this to windowHeight checkout won't show
+            ]}
+        />
+    );
 };

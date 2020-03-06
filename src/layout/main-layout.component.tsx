@@ -54,12 +54,7 @@ export const MainLayout = props => {
 
     if (props.safeArea) {
         return (
-            <SafeAreaLayout
-                style={{
-                    flex: 1,
-                }}
-                insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}
-            >
+            <SafeAreaLayout insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}>
                 {props.showHeader && header()}
                 <Layout
                     level={props.level}

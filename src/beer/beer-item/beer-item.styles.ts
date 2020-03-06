@@ -1,46 +1,34 @@
-import { dimensions, variables } from '../../shared/variables';
+import { dimensions, variables, spacing } from '../../shared/variables';
 import { withStyles } from '@ui-kitten/components';
 import { BeerItem } from './beer-item.component';
 
-const innerCardWidth = dimensions.innerWidth - variables.cardMargin * 2;
-const buttonWidth = 45;
-const quantityMargin = 4;
-const quantityWidth = (innerCardWidth + 4 * 2) / 8 - 4 * 2;
+const buttonWidth = 55;
+const cardWidth = dimensions.innerWidth - buttonWidth - spacing(1);
+const contentWidth = cardWidth - variables.cardMargin * 2;
 
 export const ThemedBeerItem = withStyles(BeerItem, theme => ({
     container: {
+        marginBottom: spacing(1),
+    },
+    card: {
         padding: variables.cardMargin,
-        marginVertical: 5,
-        borderRadius: 5,
+        borderRadius: variables.borderRadius1,
+        marginRight: spacing(1),
+        width: cardWidth,
+        height: '100%',
     },
     content: {
-        width: dimensions.innerWidth - variables.cardMargin * 2 - buttonWidth,
+        width: contentWidth,
         padding: 0,
         marginRight: 0,
     },
     price: {
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        marginRight: 20,
-        borderRadius: 5,
+        paddingVertical: spacing(1),
+        paddingHorizontal: spacing(1.5),
+        borderRadius: variables.borderRadius1,
         backgroundColor: theme['color-primary-default'],
     },
-    addBtnContainer: {
-        width: 45,
-    },
-    quantity: {
-        backgroundColor: theme['color-basic-400'],
-        width: quantityWidth,
-        height: quantityWidth,
-        marginHorizontal: quantityMargin,
-        borderRadius: 5,
-    },
-
-    quantitySelected: {
-        backgroundColor: theme['color-primary-default'],
-    },
-    quantityContainer: {
-        marginHorizontal: -quantityMargin,
-        marginTop: 16,
+    addContainer: {
+        width: buttonWidth,
     },
 }));

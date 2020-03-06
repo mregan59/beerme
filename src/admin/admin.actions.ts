@@ -7,19 +7,9 @@ export const getBeers = () => async dispatch => {
 
     beersRef
         .get()
-        // .then(function(querySnapshot) {
-        //     querySnapshot.forEach(function(doc) {
-        //         // doc.data() is never undefined for query doc snapshots
-        //         console.log(doc.id, ' => ', doc.data());
-        //     });
-        // });
         .then(querySnapshot => {
-            //console.log('querySnapshot');
-            // console.log(querySnapshot);
             const beers = [];
             querySnapshot.forEach(doc => {
-                // console.log('doc');
-                //console.log(doc);
                 const { name, description, price, quantity } = doc.data();
                 beers.push({
                     id: doc.id,
@@ -29,11 +19,10 @@ export const getBeers = () => async dispatch => {
                     quantity,
                 });
             });
-            console.log(beers);
-            getBeersSuccess(beers);
+            dispatch(getBeersSuccess(beers));
         })
         .catch(function(error) {
-            getBeersFailed(error);
+            dispatch(getBeersFailed(error));
         });
 };
 
@@ -43,12 +32,10 @@ function getBeersRequested() {
     };
 }
 
-function getBeersSuccess(payload) {
-    console.log('here');
-    console.log(payload);
+function getBeersSuccess(beers) {
     return {
         type: 'GET_BEERS_SUCCESS',
-        payload,
+        beers,
     };
 }
 
