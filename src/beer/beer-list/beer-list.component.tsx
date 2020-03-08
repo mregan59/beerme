@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
-import { MainLayout } from '../../layout';
-import { Layout, Text, Card, Button } from '@ui-kitten/components';
-import { FlexBox } from '../../components/flexbox';
+import { View } from 'react-native';
 import { BeerItem } from '../beer-item';
 import firebase from 'firebase';
 import '@firebase/firestore';
@@ -21,13 +18,16 @@ export const BeerList = props => {
         beersRef.onSnapshot(querySnapshot => {
             const list = [];
             querySnapshot.forEach(doc => {
-                const { name, description, price, quantity } = doc.data();
+                const { name, description, price, quantity, ibu, abv, style_temp } = doc.data();
                 list.push({
                     id: doc.id,
                     name,
                     description,
                     price,
                     quantity,
+                    ibu,
+                    abv,
+                    style_temp
                 });
             });
             setBeers(list);
@@ -52,8 +52,8 @@ export const BeerList = props => {
     });
 
     return (
-        <Layout level="3" style={themedStyle.container}>
-            <ScrollView style={themedStyle.scrollView}>{items}</ScrollView>
-        </Layout>
+        <View style={themedStyle.container}>
+            {items}
+        </View>
     );
 };

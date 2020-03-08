@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import {
     Text,
     Button,
@@ -12,10 +12,12 @@ import { AppRoute } from '../navigation/app-routes';
 import { BeerList } from '../beer/beer-list';
 import { Checkout } from '../checkout';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
-import { FlexBox } from '../components/flexbox';
-import { Spacer } from '../components/spacer';
+import { Spacer, Calendar, FlexBox } from '../components';
+import moment from 'moment';
 
 export const Home = props => {
+
+    const [deliveryDate, setDeliveryDate] = useState(moment().add(7, 'day'))
     const { themedStyle } = props;
     const navigateToSettings = () => {
         props.navigation.navigate(AppRoute.SETTINGS);
@@ -45,17 +47,26 @@ export const Home = props => {
             <MainLayout
                 safeArea={true}
                 padding={null}
-                showTitle={false}
-                rightControl={renderRightControl}
-                leftControl={renderLeftControl}
+                title='Order'
+                showBack
+                //rightControl={renderRightControl}
+                //leftControl={renderLeftControl}
                 {...props}
             >
-                <FlexBox row justifybetween style={themedStyle.dateContainer}>
-                    <Text category="label">YOUR DELIVERY DATE</Text>
-                    <Spacer height={1}></Spacer>
-                    <Text category="h3">Feb 16, 2020</Text>
-                </FlexBox>
-                <BeerList></BeerList>
+                <Layout level="3">
+                    <ScrollView>
+                        <FlexBox justifybetween style={themedStyle.dateContainer}>
+                            <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Delivery Date</Text>
+                            <Text style={themedStyle.dateText} category="h5">{deliveryDate.format('dddd, MMM DD, YYYY')}</Text>
+                            <Spacer height={2}></Spacer>
+                            < Calendar currentDate={deliveryDate} onSelect={date => setDeliveryDate(date)}></Calendar>
+                            {/* <Spacer height={6}></Spacer> */}
+                        </FlexBox>
+                        <Spacer height={2}></Spacer>
+                        <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Beers</Text>
+                        <BeerList></BeerList>
+                    </ScrollView>
+                </Layout>
             </MainLayout>
             <Checkout></Checkout>
         </View>

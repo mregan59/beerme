@@ -7,6 +7,8 @@ export const ThemedBeerList = withStyles(BeerList, theme => ({
         width: '100%',
         height: '100%',
         flex: 1,
+        padding: variables.sideMargin,
+        paddingLeft: 0,
     },
     scrollView: {
         flex: 1,

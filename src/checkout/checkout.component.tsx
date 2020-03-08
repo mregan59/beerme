@@ -5,7 +5,7 @@ import { Text, Button } from '@ui-kitten/components';
 import Animated from 'react-native-reanimated';
 
 import BottomSheet from 'reanimated-bottom-sheet';
-import { FlexBox } from '../components/flexbox';
+import { FlexBox, Spacer } from '../components';
 
 const AnimatedView = Animated.View;
 
@@ -24,8 +24,7 @@ export const Checkout = props => {
         });
         return (
             <FlexBox style={themedStyle.content} justifycenter aligncenter>
-                <AnimatedView
-                    style={{ transform: [{ scale: animatedScale }] }}
+                <AnimatedView style={{ transform: [{ scale: animatedScale }] }}
                 ></AnimatedView>
             </FlexBox>
         );
@@ -47,21 +46,11 @@ export const Checkout = props => {
         <FlexBox row justifyend aligncenter style={themedStyle.header}>
             <FlexBox style={themedStyle.total} row justifybetween aligncenter>
                 <Text category="s2" appearance="alternative">
-                    TOTAL
-                </Text>
-                <Text
-                    category="s2"
-                    style={{ marginHorizontal: 16 }}
-                    appearance="alternative"
-                >
-                    6 kegs
-                </Text>
-                <Text category="s2" appearance="alternative">
-                    $300
+                    6 KEGS
                 </Text>
             </FlexBox>
             <Button size="large" onPress={openCheckout}>
-                View Order
+                Review Order
             </Button>
         </FlexBox>
     );

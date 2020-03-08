@@ -53,47 +53,50 @@ export const NumberPicker = props => {
             {num == 0 ? (
                 <Button
                     status="basic"
+
                     style={[themedStyle.startBtn]}
                     onPress={add}
                 >
                     +
                 </Button>
             ) : (
-                <React.Fragment>
-                    <Button
-                        status="primary"
-                        style={[
-                            themedStyle.button,
-                            themedStyle.addBtn,
-                            addDisabled && themedStyle.buttonDisabled,
-                        ]}
-                        disabled={addDisabled}
-                        onPress={add}
-                    >
-                        +
+                    <React.Fragment>
+                        <Button
+                            size="small"
+                            status="primary"
+                            style={[
+                                themedStyle.button,
+                                themedStyle.addBtn,
+                                addDisabled && themedStyle.buttonDisabled,
+                            ]}
+                            disabled={addDisabled}
+                            onPress={add}
+                        >
+                            +
                     </Button>
-                    <Input
-                        textAlign={'center'}
-                        style={themedStyle.input}
-                        selectTextOnFocus
-                        keyboardType="numeric"
-                        value={stringNum}
-                        onChangeText={setInput}
-                    />
-                    <Button
-                        status="primary"
-                        style={[
-                            themedStyle.button,
-                            themedStyle.subtractBtn,
-                            subtractDisabled && themedStyle.buttonDisabled,
-                        ]}
-                        disabled={subtractDisabled}
-                        onPress={subtract}
-                    >
-                        -
+                        <Input
+                            textAlign={'center'}
+                            style={themedStyle.input}
+                            selectTextOnFocus
+                            keyboardType="numeric"
+                            value={stringNum}
+                            onChangeText={setInput}
+                        />
+                        <Button
+                            size="small"
+                            status="primary"
+                            style={[
+                                themedStyle.button,
+                                themedStyle.subtractBtn,
+                                subtractDisabled && themedStyle.buttonDisabled,
+                            ]}
+                            disabled={subtractDisabled}
+                            onPress={subtract}
+                        >
+                            -
                     </Button>
-                </React.Fragment>
-            )}
+                    </React.Fragment>
+                )}
         </View>
     );
 };

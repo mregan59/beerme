@@ -10,6 +10,8 @@ export const variables = {
     cardMargin: spacing(2),
     borderRadius1: 5,
     borderRadius2: 10,
+    borderRadius3: 30,
+    borderRadiusRound: 50,
 };
 
 export const dimensions = {

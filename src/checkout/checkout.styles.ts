@@ -9,7 +9,7 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
         backgroundColor: 'purple',
     },
     header: {
-        backgroundColor: theme['color-primary-focus'],
+        backgroundColor: theme['color-primary-400'],
         height: 100,
         width: dimensions.fullWidth,
         padding: 30,
@@ -17,7 +17,7 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
         borderTopLeftRadius: 35,
     },
     content: {
-        backgroundColor: theme['color-primary-focus'],
+        backgroundColor: theme['color-primary-400'],
         // height: '100%',
         //alignItems: 'center',
         height: 450,
@@ -33,7 +33,7 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
         paddingHorizontal: 12,
         height: 48,
         borderRadius: variables.borderRadius2,
-        backgroundColor: theme['color-basic-control-transparent-200'],
+        backgroundColor: theme['color-basic-control-transparent-300'],
         marginRight: variables.sideMargin,
     },
 }));

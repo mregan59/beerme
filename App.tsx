@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { mapping, light as lightTheme } from '@eva-design/eva';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/navigation/app.navigator';
 import { AppRoute } from './src/navigation/app-routes';
 import { Provider } from 'react-redux';
 import { store } from './configureStore';
 
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { default as appTheme } from './custom-light-theme.json'; // <-- Import app theme
+
 import * as firebase from 'firebase';
 import { Loading } from './src/loading';
 import customMapping from './src/shared/custom-mapping.json';
-var config = {
+
+const theme = { ...lightTheme, ...appTheme };
+
+const config = {
     apiKey: 'AIzaSyDV5cPugR7MOmAo09cd70ffqK-heAQLhvk',
     authDomain: 'six-brothers.firebaseapp.com',
     databaseURL: 'https://six-brothers.firebaseio.com',
@@ -40,7 +46,7 @@ export default function App(props) {
                 <IconRegistry icons={EvaIconsPack} />
                 <ApplicationProvider
                     mapping={mapping}
-                    theme={lightTheme}
+                    theme={theme}
                     customMapping={customMapping}
                 >
                     <SafeAreaProvider>
@@ -49,8 +55,8 @@ export default function App(props) {
                                 <AppNavigator initialRouteName={initialRoute} />
                             </NavigationContainer>
                         ) : (
-                            <Loading></Loading>
-                        )}
+                                <Loading></Loading>
+                            )}
                     </SafeAreaProvider>
                 </ApplicationProvider>
             </React.Fragment>

@@ -1,13 +1,17 @@
-import { dimensions, variables } from '../shared/variables';
+import { dimensions, variables, spacing } from '../shared/variables';
 import { withStyles } from '@ui-kitten/components';
 import { Home } from './home.component';
 
 export const ThemedHome = withStyles(Home, theme => ({
     dateContainer: {
-        // backgroundColor: theme['color-primary-default'],
-        padding: variables.sideMargin,
-        borderRadius: variables.borderRadius2,
-        marginBottom: 5,
+        backgroundColor: theme['color-basic-100'],
+        // padding: variables.sideMargin,
+        borderRadius: variables.borderRadius3,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        paddingTop: spacing(4),
+        paddingBottom: spacing(6),
+        //marginBottom: 5,
     },
     header: {
         backgroundColor: theme['color-primary-focus'],
@@ -37,4 +41,8 @@ export const ThemedHome = withStyles(Home, theme => ({
         backgroundColor: theme['color-basic-control-transparent-200'],
         marginRight: variables.sideMargin,
     },
+
+    dateText: {
+        marginLeft: spacing(2)
+    }
 }));

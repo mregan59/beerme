@@ -28,7 +28,6 @@ export const FlexBox = props => {
         flexWrap: props.wrap && 'wrap',
         flex: props.flex1 && 1,
         width: props.w100 && '100%',
-        ...props.style,
     };
     var {
         row,
@@ -53,8 +52,16 @@ export const FlexBox = props => {
         ...other
     } = props;
     //TODO figure out way to pass in element
+
+    //check if props is array or object
+    let style = [];
+    if (props.style instanceof Array) {
+        style = [flexStyle, ...props.style]
+    } else {
+        style = [flexStyle, props.style];
+    }
     return (
-        <View {...other} style={flexStyle}>
+        <View {...other} style={style}>
             {props.children}
         </View>
     );
