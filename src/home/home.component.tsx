@@ -49,8 +49,8 @@ export const Home = props => {
                 padding={null}
                 title='Order'
                 showBack
-                //rightControl={renderRightControl}
-                //leftControl={renderLeftControl}
+                rightControl={renderRightControl}
+                leftControl={renderLeftControl}
                 {...props}
             >
                 <Layout level="3">

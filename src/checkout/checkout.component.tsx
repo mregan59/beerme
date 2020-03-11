@@ -14,7 +14,7 @@ export const Checkout = props => {
     let fall = new Animated.Value(1);
     const [allowGestures, setAllowGestures] = useState(false);
 
-    const { themedStyle } = props;
+    const { themedStyle, order } = props;
 
     const renderContent = () => {
         const animatedScale = Animated.interpolate(fall, {
@@ -22,10 +22,25 @@ export const Checkout = props => {
             outputRange: [2, 1],
             //extrapolate: Animated.Extrapolate.CLAMP,
         });
+
+        //TODO fix this. shouldn't have to fileter
+        const beerOrder = Object.keys(order).filter(key => order[key] != undefined).map(key => {
+            // console.log(order);
+            // console.log(key);
+
+
+            const beer = order[key];
+
+            return (<FlexBox>
+                <Text>{beer.name}</Text>
+                <Text>{beer.checkoutQuantity}</Text>
+            </FlexBox>)
+        })
         return (
             <FlexBox style={themedStyle.content} justifycenter aligncenter>
-                <AnimatedView style={{ transform: [{ scale: animatedScale }] }}
-                ></AnimatedView>
+                <FlexBox>{beerOrder}</FlexBox>
+                {/* <AnimatedView style={{ transform: [{ scale: animatedScale }] }}
+                ></AnimatedView> */}
             </FlexBox>
         );
     };
@@ -42,18 +57,24 @@ export const Checkout = props => {
         setAllowGestures(false);
     };
 
-    const renderHeader = () => (
-        <FlexBox row justifyend aligncenter style={themedStyle.header}>
+    const renderHeader = () => {
+        let count = 0;
+        Object.keys(order).filter(key => order[key] != undefined).forEach(item => {
+            count += order[item].checkoutQuantity;
+        });
+        return (<FlexBox row justifyend aligncenter style={themedStyle.header}>
             <FlexBox style={themedStyle.total} row justifybetween aligncenter>
                 <Text category="s2" appearance="alternative">
-                    6 KEGS
+                    {count}
                 </Text>
             </FlexBox>
             <Button size="large" onPress={openCheckout}>
                 Review Order
             </Button>
-        </FlexBox>
-    );
+        </FlexBox>)
+    };
+
+
     return (
         <View style={themedStyle.container}>
             <BottomSheet

@@ -5,48 +5,34 @@ import firebase from 'firebase';
 import '@firebase/firestore';
 import { AppRoute } from '../../navigation/app-routes';
 import { useNavigation } from '@react-navigation/native';
+import { Text } from '@ui-kitten/components'
 
 export const BeerList = props => {
     const navigation = useNavigation();
-    const [loading, setLoading] = useState(true);
-    const [beers, setBeers] = useState([]);
-    const beersRef = firebase.firestore().collection('beers');
 
     const { themedStyle } = props;
 
     useEffect(() => {
-        beersRef.onSnapshot(querySnapshot => {
-            const list = [];
-            querySnapshot.forEach(doc => {
-                const { name, description, price, quantity, ibu, abv, style_temp } = doc.data();
-                list.push({
-                    id: doc.id,
-                    name,
-                    description,
-                    price,
-                    quantity,
-                    ibu,
-                    abv,
-                    style_temp
-                });
-            });
-            setBeers(list);
-        });
-
-        if (loading) {
-            setLoading(false);
-        }
+        props.getBeers()
     }, []);
 
     const navigateToBeer = beer => {
         navigation.navigate(AppRoute.BEER_DETAILS, { beer: beer });
     };
-    const items = beers.map(beer => {
+    if (props.beers.length == 0) {
+        return <Text>Loading</Text>
+    }
+    const items = props.beers.map(beer => {
+        let checkoutQuantity = 0;
+        const checkoutBeer = props.order[beer.id]
+        if (checkoutBeer !== undefined && checkoutBeer) {
+            checkoutQuantity = checkoutBeer.checkoutQuantity;
+        }
         return (
             <BeerItem
                 key={beer.id}
                 onSelect={() => navigateToBeer(beer)}
-                beer={beer}
+                beer={{ ...beer, checkoutQuantity }}
             ></BeerItem>
         );
     });

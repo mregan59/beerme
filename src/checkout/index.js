@@ -1,1 +1,2 @@
-export { ThemedCheckout as Checkout } from './checkout.styles';
+export { checkoutReducer } from './checkout.reducer';
+export { Checkout } from './checkout.container';

@@ -7,6 +7,10 @@ import { View, TouchableWithoutFeedback } from 'react-native';
 export const BeerItem = props => {
     const { beer, themedStyle } = props;
 
+    const onAddBeer = (beer, quantity) => {
+        props.addBeerToOrder(beer, quantity);
+    }
+
     return (
         <View>
             <FlexBox row aligncenter style={themedStyle.container}>
@@ -44,7 +48,7 @@ export const BeerItem = props => {
                     </Layout>
                 </TouchableWithoutFeedback>
                 <View style={themedStyle.addContainer}>
-                    <NumberPicker value={0} max={5}></NumberPicker>
+                    <NumberPicker onChange={(value) => onAddBeer(beer, value)} value={beer.checkoutQuantity} max={beer.quantity}></NumberPicker>
                 </View>
             </FlexBox>
         </View>

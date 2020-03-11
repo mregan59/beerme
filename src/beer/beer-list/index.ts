@@ -1,1 +1,1 @@
-export { ThemedBeerList as BeerList } from './beer-list.styles';
+export { BeerList } from './beer-list.container';
