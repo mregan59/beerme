@@ -45,3 +45,37 @@ function getBeersFailed(error) {
         error,
     };
 }
+
+export const addBeer = beer => async dispatch => {
+    const beersRef = firebase.firestore().collection('beers');
+    dispatch(addBeerRequested());
+
+    beersRef;
+    beersRef
+        .add(beer)
+        .then(() => {
+            dispatch(addBeerSuccess());
+        })
+        .catch(function(error) {
+            dispatch(addBeerFailed(error));
+        });
+};
+
+function addBeerRequested() {
+    return {
+        type: 'ADD_BEER_REQUESTED',
+    };
+}
+
+function addBeerSuccess() {
+    return {
+        type: 'ADD_BEER_SUCCESS',
+    };
+}
+
+function addBeerFailed(error) {
+    return {
+        type: 'ADD_BEER_FAILED',
+        error,
+    };
+}

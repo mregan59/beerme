@@ -1,6 +1,7 @@
 const initialState = {
     loading: false,
     beers: [],
+    styles: [],
 };
 
 export function beerReducer(state = initialState, action) {
@@ -15,6 +16,26 @@ export function beerReducer(state = initialState, action) {
                 loading: false,
                 error: action.errors,
             };
+        case 'GET_BEER_STYLES_REQUESTED':
+            return { ...state };
+        case 'GET_BEER_STYLES_SUCCESS':
+            return { ...state, styles: action.styles };
+        case 'GET_BEER_STYLES_FAILED':
+            return {
+                ...state,
+                error: action.errors,
+            };
+        case 'ADD_BEER_REQUESTED':
+            return { ...state, adding: true };
+        case 'ADD_BEER_SUCCESS':
+            return { ...state, adding: false };
+        case 'ADD_BEER_FAILED':
+            return {
+                ...state,
+                adding: false,
+                error: action.error,
+            };
+
         default:
             return state;
     }

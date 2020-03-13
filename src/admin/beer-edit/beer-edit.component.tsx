@@ -1,72 +1,114 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MainLayout } from '../../layout';
 import {
     Input,
     Datepicker,
-    Layout,
-    Text,
     Button,
     Icon,
+    Select,
 } from '@ui-kitten/components';
 import { Image } from 'react-native';
-import firebase from 'firebase';
 import '@firebase/firestore';
+import moment from 'moment';
+import { useInput, useSelect, useDatePicker } from '../../util/hooks';
+import { Spacer } from '../../components/spacer'
+import { SettingsIcon } from '../../assets/icons';
 
 export const BeerEdit = props => {
-    const [name, setName] = useState('');
-    const [desc, setDesc] = useState('');
-    const [price, setPrice] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [date, setDate] = useState(new Date());
-    const beersRef = firebase.firestore().collection('beers');
-    // const [expireDate, setExpireDate] = useState(
-    //     moment()
-    //         .add(14, 'days')
-    //         .toDate()
-    // );
+    const { value: name, bind: bindName } = useInput('');
+    const { value: desc, bind: bindDesc } = useInput('');
+    const { value: price, bind: bindPrice } = useInput('');
+    const { value: ibu, bind: bindIbu } = useInput('');
+    const { value: abv, bind: bindAbv } = useInput('');
+    const { value: quantity, bind: bindQuantity } = useInput('');
+
+    const { value: style, bind: bindStyle } = useSelect(null);
+
+    const availableDateRef = useRef(null);
+    const expireDateRef = useRef(null);
+    const [availableDate, setAvailableDate] = useState(moment().toDate());
+    const [expireDate, setExpireDate] = useState(
+        moment()
+            .add(14, 'days').toDate()
+    );
+
+    useEffect(() => {
+        props.getBeerStyles();
+    }, [])
+
+
+    useEffect(() => {
+        console.log(style);
+    }, [style])
+
     const createBeer = () => {
-        beersRef.add({
+        props.addBeer({
             name: name,
             description: desc,
             price: price,
             quantity: quantity,
-        });
+            availableDate: availableDate,
+            style: style.id,
+            expireDate: expireDate,
+            ibu: ibu,
+            abv: abv
+        })
     };
+
+    const onAvailableDateSelect = date => {
+        setAvailableDate(date);
+        availableDateRef.current.blur();
+
+    }
+
+    const onExpireDateSelect = date => {
+        setExpireDate(date);
+        expireDateRef.current.blur();
+
+    }
+
+    const mappedStyles = props.styles.map(style => { return { text: style.style, id: style.id } })
+
+
     return (
         <MainLayout {...props} showBack padding level="2">
-            <Input placeholder="Name" value={name} onChangeText={setName} />
+            <Input placeholder="Name" {...bindName} />
             <Input
                 placeholder="Description"
-                value={desc}
-                onChangeText={setDesc}
+                {...bindDesc}
             />
+            <Select
+                data={mappedStyles}
+                {...bindStyle}
+            />
+            <Spacer height={.5}></Spacer>
             <Input
                 placeholder="Price"
-                value={price}
-                onChangeText={setPrice}
+                {...bindPrice}
                 keyboardType="numeric"
             />
             <Input
                 placeholder="Quantity"
-                value={quantity}
-                onChangeText={setQuantity}
+                {...bindQuantity}
+                keyboardType="numeric"
+            />
+            <Input
+                placeholder="IBU"
+                {...bindIbu}
+                keyboardType="numeric"
+            />
+            <Input
+                placeholder="ABV"
+                {...bindAbv}
                 keyboardType="numeric"
             />
             <Datepicker
-                placeholder="Pick a start date"
-                icon={style => (
-                    <Image
-                        style={style}
-                        source={{
-                            uri:
-                                'https://akveo.github.io/eva-icons/fill/png/128/google.png',
-                        }}
-                    ></Image>
-                )}
-                date={date}
-                onSelect={setDate}
+                icon={SettingsIcon}
+                ref={availableDateRef}
+                date={availableDate}
+                onSelect={onAvailableDateSelect}
             />
-            {/* <Datepicker date={expireDate} onSelect={setExpireDate} /> */}
+            <Datepicker icon={SettingsIcon} ref={expireDateRef} date={expireDate} onSelect={onExpireDateSelect} />
             <Button onPress={createBeer}>Create Beer</Button>
         </MainLayout>
     );

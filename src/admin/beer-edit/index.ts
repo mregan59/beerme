@@ -1,1 +1,1 @@
-export { BeerEdit } from './beer-edit.component';
+export { BeerEdit } from './beer-edit.container';

@@ -15,3 +15,35 @@ export const useInput = initialValue => {
         },
     };
 };
+
+export const useSelect = initialValue => {
+    const [value, setValue] = useState(initialValue);
+
+    return {
+        value,
+        setValue,
+        reset: () => setValue(''),
+        bind: {
+            selectedOption: value,
+            onSelect: value => {
+                setValue(value);
+            },
+        },
+    };
+};
+
+export const useDatePicker = initialValue => {
+    const [value, setValue] = useState(initialValue);
+
+    return {
+        value,
+        setValue,
+        reset: () => setValue(''),
+        bind: {
+            date: value,
+            onSelect: value => {
+                setValue(value);
+            },
+        },
+    };
+};
