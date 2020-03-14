@@ -17,4 +17,5 @@ export const variables = {
 export const dimensions = {
     innerWidth: width - variables.sideMargin * 2,
     fullWidth: width,
+    height: height,
 };

@@ -6,8 +6,13 @@ import Animated from 'react-native-reanimated';
 
 import BottomSheet from 'reanimated-bottom-sheet';
 import { FlexBox, Spacer } from '../components';
+import { CheckoutItem } from './checkout-item';
+import { dimensions } from '../shared/variables';
 
 const AnimatedView = Animated.View;
+
+const headerHeight = 100;
+const bottomHeight = dimensions.height - 100;
 
 export const Checkout = props => {
     let bottomSheetRef = useRef(null);
@@ -31,14 +36,24 @@ export const Checkout = props => {
 
             const beer = order[key];
 
-            return (<FlexBox>
-                <Text>{beer.name}</Text>
-                <Text>{beer.checkoutQuantity}</Text>
-            </FlexBox>)
+            return (<CheckoutItem beer={beer} removeBeer={() => props.removeBeerFromOrder(beer)} />)
         })
         return (
-            <FlexBox style={themedStyle.content} justifycenter aligncenter>
-                <FlexBox>{beerOrder}</FlexBox>
+            <FlexBox style={themedStyle.content} justifystart alignstart>
+                <FlexBox style={themedStyle.beersContainer}>{beerOrder}</FlexBox>
+                <FlexBox style={themedStyle.totalContainer}>
+                    <FlexBox style={themedStyle.totalRow} justifybetween aligncenter row>
+                        <Text category="s1" appearance="alternative">Total</Text>
+                        <Text category="s1" appearance="alternative">$800.92</Text>
+                    </FlexBox>
+                    <Spacer height={1}></Spacer>
+                    <FlexBox style={themedStyle.totalRow} justifybetween aligncenter row>
+                        <Text category="s1" appearance="alternative">DeliveryDate</Text>
+                        <Text category="s1" appearance="alternative">March 13, 2020</Text>
+                    </FlexBox>
+                </FlexBox>
+                <Spacer height={2}></Spacer>
+                <Button style={themedStyle.confirmBtn}>Place Order</Button>
                 {/* <AnimatedView style={{ transform: [{ scale: animatedScale }] }}
                 ></AnimatedView> */}
             </FlexBox>
@@ -68,7 +83,7 @@ export const Checkout = props => {
                     {count}
                 </Text>
             </FlexBox>
-            <Button size="large" onPress={openCheckout}>
+            <Button size="large" style={themedStyle.reviewBtn} onPress={openCheckout}>
                 Review Order
             </Button>
         </FlexBox>)
@@ -81,7 +96,7 @@ export const Checkout = props => {
                 enabledGestureInteraction={allowGestures}
                 ref={bottomSheetRef}
                 initialSnap={0}
-                snapPoints={[100, 450, 450]}
+                snapPoints={[headerHeight, bottomHeight, bottomHeight]}
                 renderContent={renderContent}
                 renderHeader={renderHeader}
                 callbackNode={fall}

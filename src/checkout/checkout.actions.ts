@@ -12,3 +12,14 @@ const addBeerToOrderAction = (beer, quantity) => {
         quantity,
     };
 };
+
+export const removeBeerFromOrder = beer => async dispatch => {
+    dispatch(removeBeerFromOrderAction(beer));
+};
+
+const removeBeerFromOrderAction = beer => {
+    return {
+        type: 'REMOVE_BEER_FROM_ORDER',
+        beer,
+    };
+};

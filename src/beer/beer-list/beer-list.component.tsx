@@ -22,10 +22,11 @@ export const BeerList = props => {
     if (props.beers.length == 0) {
         return <Text>Loading</Text>
     }
+
     const items = props.beers.map(beer => {
         let checkoutQuantity = 0;
         const checkoutBeer = props.order[beer.id]
-        if (checkoutBeer !== undefined && checkoutBeer) {
+        if (checkoutBeer != undefined && checkoutBeer) {
             checkoutQuantity = checkoutBeer.checkoutQuantity;
         }
         return (
@@ -36,6 +37,7 @@ export const BeerList = props => {
             ></BeerItem>
         );
     });
+    console.log('ITEMS');
 
     return (
         <View style={themedStyle.container}>

@@ -21,6 +21,14 @@ export function checkoutReducer(state = initialState, action) {
                     [action.beer.id]: beer,
                 },
             };
+        case 'REMOVE_BEER_FROM_ORDER':
+            return {
+                ...state,
+                order: {
+                    ...state.order,
+                    [action.beer.id]: undefined,
+                },
+            };
 
         default:
             return state;

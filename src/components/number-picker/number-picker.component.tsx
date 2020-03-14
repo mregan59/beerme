@@ -24,6 +24,13 @@ export const NumberPicker = props => {
         props.onChange && props.onChange(num);
     }, [num]);
 
+    useDidUpdateEffect(() => {
+        if (props.value != num) {
+            setNum(props.value);
+        }
+
+    }, [props.value]);
+
     const add = () => {
         if (!max || num < max) {
             setNum(num + 1);

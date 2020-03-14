@@ -72,3 +72,8 @@ export const OrderIcon = (style): IconElement => (
 export const SettingsIcon = (style): IconElement => (
     <Icon {...style} name="settings-outline" />
 );
+
+
+export const CloseIcon = (style): IconElement => (
+    <Icon {...style} name="close-outline" />
+);

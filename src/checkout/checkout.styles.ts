@@ -1,4 +1,4 @@
-import { dimensions, variables } from '../shared/variables';
+import { dimensions, variables, spacing } from '../shared/variables';
 import { withStyles } from '@ui-kitten/components';
 import { Checkout } from './checkout.component';
 
@@ -9,25 +9,48 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
         backgroundColor: 'purple',
     },
     header: {
-        backgroundColor: theme['color-primary-400'],
+        backgroundColor: theme['color-primary-500'],
         height: 100,
         width: dimensions.fullWidth,
-        padding: 30,
+        padding: variables.sideMargin,
         borderTopRightRadius: 35,
         borderTopLeftRadius: 35,
     },
     content: {
-        backgroundColor: theme['color-primary-400'],
+        backgroundColor: theme['color-primary-500'],
         // height: '100%',
         //alignItems: 'center',
-        height: 450,
+        height: '100%',
+        //minHeight: 350,
+        //minHeight: 350,
         overflow: 'visible',
         width: dimensions.fullWidth,
         borderWidth: 0,
         padding: variables.sideMargin,
     },
-    continueBtn: {
+    reviewBtn: {
+        backgroundColor: theme['color-primary-400'],
+    },
+    beersContainer: {
+        backgroundColor: theme['color-primary-400'],
+        padding: spacing(2.5),
+        paddingRight: spacing(0.5),
+        width: '100%',
+        borderRadius: variables.borderRadius2,
+    },
+    totalContainer: {
+        backgroundColor: theme['color-primary-400'],
+        padding: spacing(2.5),
+        width: '100%',
+        borderRadius: variables.borderRadius2,
+        marginTop: spacing(2),
+    },
+
+    confirmBtn: {
+        marginTop: 'auto',
+        marginBottom: spacing(2),
         width: dimensions.innerWidth,
+        backgroundColor: theme['color-primary-600'],
     },
     total: {
         paddingHorizontal: 12,
