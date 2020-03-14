@@ -34,11 +34,6 @@ export const BeerEdit = props => {
         props.getBeerStyles();
     }, [])
 
-
-    useEffect(() => {
-        console.log(style);
-    }, [style])
-
     const createBeer = () => {
         props.addBeer({
             name: name,
