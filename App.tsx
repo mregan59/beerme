@@ -6,8 +6,9 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/navigation/app.navigator';
 import { AppRoute } from './src/navigation/app-routes';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { store } from './configureStore';
+import { store, persistor } from './createStore';
 
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { default as appTheme } from './custom-light-theme.json'; // <-- Import app theme
@@ -42,24 +43,26 @@ export default function App(props) {
     }, []);
     return (
         <Provider store={store}>
-            <React.Fragment>
-                <IconRegistry icons={EvaIconsPack} />
-                <ApplicationProvider
-                    mapping={mapping}
-                    theme={theme}
-                    customMapping={customMapping}
-                >
-                    <SafeAreaProvider>
-                        {initialRoute ? (
-                            <NavigationContainer>
-                                <AppNavigator initialRouteName={initialRoute} />
-                            </NavigationContainer>
-                        ) : (
-                                <Loading></Loading>
-                            )}
-                    </SafeAreaProvider>
-                </ApplicationProvider>
-            </React.Fragment>
+            <PersistGate loading={null} persistor={persistor}>
+                <React.Fragment>
+                    <IconRegistry icons={EvaIconsPack} />
+                    <ApplicationProvider
+                        mapping={mapping}
+                        theme={theme}
+                        customMapping={customMapping}
+                    >
+                        <SafeAreaProvider>
+                            {initialRoute ? (
+                                <NavigationContainer>
+                                    <AppNavigator initialRouteName={initialRoute} />
+                                </NavigationContainer>
+                            ) : (
+                                    <Loading></Loading>
+                                )}
+                        </SafeAreaProvider>
+                    </ApplicationProvider>
+                </React.Fragment>
+            </PersistGate>
         </Provider>
     );
 }

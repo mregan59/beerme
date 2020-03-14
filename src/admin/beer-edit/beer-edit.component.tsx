@@ -7,10 +7,9 @@ import {
     Icon,
     Select,
 } from '@ui-kitten/components';
-import { Image } from 'react-native';
 import '@firebase/firestore';
 import moment from 'moment';
-import { useInput, useSelect, useDatePicker } from '../../util/hooks';
+import { useInput, useSelect } from '../../util/hooks';
 import { Spacer } from '../../components/spacer'
 import { SettingsIcon } from '../../assets/icons';
 
@@ -21,7 +20,6 @@ export const BeerEdit = props => {
     const { value: ibu, bind: bindIbu } = useInput('');
     const { value: abv, bind: bindAbv } = useInput('');
     const { value: quantity, bind: bindQuantity } = useInput('');
-
     const { value: style, bind: bindStyle } = useSelect(null);
 
     const availableDateRef = useRef(null);

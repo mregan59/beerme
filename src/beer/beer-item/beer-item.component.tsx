@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Layout, Text, Button } from '@ui-kitten/components';
 import { FlexBox, Badge, NumberPicker, Spacer } from '../../components';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View, TouchableWithoutFeedback } from 'react-native';
 
 export const BeerItem = props => {
     const { beer, themedStyle } = props;
 
     const onAddBeer = (beer, quantity) => {
+        console.log('add beer to order');
         props.addBeerToOrder(beer, quantity);
     }
 

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Input } from '@ui-kitten/components';
+import { useDidUpdateEffect } from '../../util/hooks';
 
 export const NumberPicker = props => {
     const [num, setNum] = useState(props.value || 0);
@@ -14,7 +15,7 @@ export const NumberPicker = props => {
 
     const min = 0; // can add this in  as a prop maybe sometime
 
-    useEffect(() => {
+    useDidUpdateEffect(() => {
         if (num <= min) {
             setStringNum('1');
         } else {
