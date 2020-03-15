@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Text, Button } from '@ui-kitten/components';
@@ -25,6 +25,12 @@ export const Checkout = props => {
     const { themedStyle, order } = props;
     const { beers } = order;
 
+    useEffect(() => {
+        if (Object.keys(order.beers).length == 0) {
+            bottomSheetRef.current.snapTo(0);
+        }
+    }, [order.beers])
+
     const renderContent = () => {
         const animatedScale = Animated.interpolate(fall, {
             inputRange: [0, 1], //0 is open //1 is closed
@@ -40,13 +46,15 @@ export const Checkout = props => {
             return (<CheckoutItem beer={beer} removeBeer={() => props.removeBeerFromOrder(beer)} />)
         })
 
+
         const confirmOrder = () => {
             props.confirmOrder({
                 ...order,
                 total: beerTotal
             });
+
             props.clearOrder();
-            bottomSheetRef.current.snapTo(0);
+
         }
 
 

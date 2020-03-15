@@ -16,6 +16,7 @@ export const BeerList = props => {
         props.getBeers()
     }, []);
 
+
     const navigateToBeer = beer => {
         navigation.navigate(AppRoute.BEER_DETAILS, { beer: beer });
     };
@@ -25,7 +26,7 @@ export const BeerList = props => {
 
     const items = props.beers.map(beer => {
         let checkoutQuantity = 0;
-        const checkoutBeer = props.order[beer.id]
+        const checkoutBeer = props.order.beers[beer.id]
         if (checkoutBeer != undefined && checkoutBeer) {
             checkoutQuantity = checkoutBeer.checkoutQuantity;
         }

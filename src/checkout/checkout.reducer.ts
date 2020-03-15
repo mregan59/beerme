@@ -24,7 +24,10 @@ export function checkoutReducer(state = initialState, action) {
             } else {
                 finalBeers = {
                     ...beers,
-                    [action.beer.id]: action.beer,
+                    [action.beer.id]: {
+                        ...action.beer,
+                        checkoutQuantity: action.quantity,
+                    },
                 };
             }
 

@@ -22,9 +22,8 @@ exports.onItemCreation = functions.firestore
                 const beer = data.beers[key];
                 return `<br/><br/>${
                     beer.name
-                }......................$${beer.quantity * beer.price}<br/>${
-                    beer.quantity
-                } at $${beer.price}/keg`;
+                }......................$${beer.checkoutQuantity *
+                    beer.price}<br/>${beer.quantity} at $${beer.price}/keg`;
             })
             .join('');
 
