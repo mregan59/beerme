@@ -31,7 +31,6 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
                 //     Platform.OS === 'android'
                 //         ? getStatusBarHeight()
                 //         : safeAreaInsets.top;
-                // console.log(paddingTop);
                 return { paddingTop: safeAreaInsets.top };
         }
     };

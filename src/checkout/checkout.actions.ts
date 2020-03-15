@@ -23,3 +23,47 @@ const removeBeerFromOrderAction = beer => {
         beer,
     };
 };
+
+export const clearOrder = () => async dispatch => {
+    dispatch(clearOrderAction());
+};
+
+const clearOrderAction = () => {
+    return {
+        type: 'CLEAR_ORDER',
+    };
+};
+
+export const confirmOrder = order => async dispatch => {
+    const ordersRef = firebase.firestore().collection('orders');
+    dispatch(confirmOrderRequested());
+
+    ordersRef
+        .add(order)
+        .then(() => {
+            dispatch(confirmOrderSuccess(order));
+        })
+        .catch(function(error) {
+            dispatch(confirmOrderFailed(error));
+        });
+};
+
+function confirmOrderRequested() {
+    return {
+        type: 'CONFIRM_ORDER_REQUESTED',
+    };
+}
+
+function confirmOrderSuccess(order) {
+    return {
+        type: 'CONFIRM_ORDER_SUCCESS',
+        order,
+    };
+}
+
+function confirmOrderFailed(error) {
+    return {
+        type: 'CONFIRM_ORDER_FAILED',
+        error,
+    };
+}

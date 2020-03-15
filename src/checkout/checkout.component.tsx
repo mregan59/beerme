@@ -9,6 +9,9 @@ import { FlexBox, Spacer } from '../components';
 import { CheckoutItem } from './checkout-item';
 import { dimensions } from '../shared/variables';
 
+//TODO get this from date picker
+
+
 const AnimatedView = Animated.View;
 
 const headerHeight = 100;
@@ -20,6 +23,7 @@ export const Checkout = props => {
     const [allowGestures, setAllowGestures] = useState(false);
 
     const { themedStyle, order } = props;
+    const { beers } = order;
 
     const renderContent = () => {
         const animatedScale = Animated.interpolate(fall, {
@@ -28,23 +32,31 @@ export const Checkout = props => {
             //extrapolate: Animated.Extrapolate.CLAMP,
         });
 
+        let beerTotal = 0;
         //TODO fix this. shouldn't have to fileter
-        const beerOrder = Object.keys(order).filter(key => order[key] != undefined).map(key => {
-            // console.log(order);
-            // console.log(key);
-
-
-            const beer = order[key];
-
+        const beerOrder = Object.keys(beers).filter(key => beers[key] != undefined).map(key => {
+            const beer = beers[key];
+            beerTotal += beer.quantity * beer.price;
             return (<CheckoutItem beer={beer} removeBeer={() => props.removeBeerFromOrder(beer)} />)
         })
+
+        const confirmOrder = () => {
+            props.confirmOrder({
+                ...order,
+                total: beerTotal
+            });
+            props.clearOrder();
+            bottomSheetRef.current.snapTo(0);
+        }
+
+
         return (
             <FlexBox style={themedStyle.content} justifystart alignstart>
                 <FlexBox style={themedStyle.beersContainer}>{beerOrder}</FlexBox>
                 <FlexBox style={themedStyle.totalContainer}>
                     <FlexBox style={themedStyle.totalRow} justifybetween aligncenter row>
                         <Text category="s1" appearance="alternative">Total</Text>
-                        <Text category="s1" appearance="alternative">$800.92</Text>
+                        <Text category="s1" appearance="alternative">${beerTotal}</Text>
                     </FlexBox>
                     <Spacer height={1}></Spacer>
                     <FlexBox style={themedStyle.totalRow} justifybetween aligncenter row>
@@ -53,7 +65,7 @@ export const Checkout = props => {
                     </FlexBox>
                 </FlexBox>
                 <Spacer height={2}></Spacer>
-                <Button style={themedStyle.confirmBtn}>Place Order</Button>
+                <Button style={themedStyle.confirmBtn} onPress={confirmOrder}>Place Order</Button>
                 {/* <AnimatedView style={{ transform: [{ scale: animatedScale }] }}
                 ></AnimatedView> */}
             </FlexBox>
@@ -74,8 +86,8 @@ export const Checkout = props => {
 
     const renderHeader = () => {
         let count = 0;
-        Object.keys(order).filter(key => order[key] != undefined).forEach(item => {
-            count += order[item].checkoutQuantity;
+        Object.keys(beers).filter(key => beers[key] != undefined).forEach(item => {
+            count += beers[item].checkoutQuantity;
         });
         return (<FlexBox row justifyend aligncenter style={themedStyle.header}>
             <FlexBox style={themedStyle.total} row justifybetween aligncenter>

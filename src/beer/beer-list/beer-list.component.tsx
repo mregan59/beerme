@@ -37,7 +37,6 @@ export const BeerList = props => {
             ></BeerItem>
         );
     });
-    console.log('ITEMS');
 
     return (
         <View style={themedStyle.container}>

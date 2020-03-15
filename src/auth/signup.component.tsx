@@ -20,7 +20,6 @@ export const SignUp = props => {
     const navigation = useNavigation();
 
     const signUp = () => {
-        console.log('sign up');
         try {
             firebase.auth().createUserWithEmailAndPassword(email, password);
             resetEmail();

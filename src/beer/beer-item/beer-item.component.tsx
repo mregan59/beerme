@@ -7,7 +7,6 @@ export const BeerItem = props => {
     const { beer, themedStyle } = props;
 
     const onAddBeer = (beer, quantity) => {
-        console.log('add beer to order');
         props.addBeerToOrder(beer, quantity);
     }
 

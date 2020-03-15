@@ -32,7 +32,6 @@ const Calendar = props => {
     const scroller = useRef(null);
 
     useEffect(() => {
-        console.log(selectedIndex)
         if (scroller) {
             //find index
             scroller.current.scrollTo({ x: (selectedIndex * 68) - (dimensions.fullWidth / 2) + 30, y: 0, animated: true })
