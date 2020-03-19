@@ -12,12 +12,17 @@ export const BeerList = props => {
 
     useEffect(() => {
         props.getBeers()
+        if (props.styles.length == 0) {
+            props.getBeerStyles()
+        }
+
     }, []);
 
 
     const navigateToBeer = beer => {
         navigation.navigate(AppRoute.BEER_DETAILS, { beer: beer });
     };
+
     if (props.beers.length == 0) {
         return <Text>Loading</Text>
     }

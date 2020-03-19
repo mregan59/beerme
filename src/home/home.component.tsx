@@ -4,6 +4,7 @@ import {
     Text,
     Layout,
     TopNavigationAction,
+    Button
 } from '@ui-kitten/components';
 import { MainLayout } from '../layout';
 import { AppRoute } from '../navigation/app-routes';
@@ -14,14 +15,15 @@ import { Spacer, Calendar, FlexBox } from '../components';
 import moment from 'moment';
 
 export const Home = props => {
-
-    const [deliveryDate, setDeliveryDate] = useState(moment().add(7, 'day'))
     const { themedStyle } = props;
     const navigateToSettings = () => {
         props.navigation.navigate(AppRoute.SETTINGS);
     };
     const navigateToAdmin = () => {
         props.navigation.navigate(AppRoute.ADMIN);
+    };
+    const navigateToOrder = () => {
+        props.navigation.navigate(AppRoute.ORDER);
     };
     const renderRightControl = () => {
         return (
@@ -37,44 +39,32 @@ export const Home = props => {
         );
     };
 
-    const editDate = () => {
-        //yeah lets make this its own control
-    };
+
     return (
-        <View style={styles.container}>
+        <View style={themedStyle.container}>
             <MainLayout
                 safeArea={true}
                 padding={null}
-                title='Order'
+                showTitle={false}
                 showBack
                 rightControl={renderRightControl}
                 leftControl={renderLeftControl}
                 {...props}
             >
-                <Layout level="3">
-                    <ScrollView>
-                        <FlexBox justifybetween style={themedStyle.dateContainer}>
-                            <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Delivery Date</Text>
-                            <Text style={themedStyle.dateText} category="h5">{deliveryDate.format('dddd, MMM DD, YYYY')}</Text>
-                            <Spacer height={2}></Spacer>
-                            < Calendar currentDate={deliveryDate} onSelect={date => setDeliveryDate(date)}></Calendar>
-                            {/* <Spacer height={6}></Spacer> */}
+                <Layout level="1" style={themedStyle.container}>
+                    <ScrollView style={themedStyle.container}>
+                        <FlexBox justifybetween >
+                            <Text category="h1" appearance="hint">Orders</Text>
+
                         </FlexBox>
                         <Spacer height={2}></Spacer>
-                        <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Beers</Text>
-                        <BeerList></BeerList>
+                        <Text category="c2" >Other Stuff</Text>
+                        <Button onPress={navigateToOrder}>Start Order</Button>
+
                     </ScrollView>
                 </Layout>
             </MainLayout>
-            <Checkout></Checkout>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-    },
-});

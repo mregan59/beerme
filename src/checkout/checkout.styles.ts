@@ -6,7 +6,6 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
     container: {
         height: 60, //TODO give this a less extra height
         width: dimensions.fullWidth,
-        backgroundColor: 'purple',
     },
     header: {
         backgroundColor: theme['color-primary-500'],

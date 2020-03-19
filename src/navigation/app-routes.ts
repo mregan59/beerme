@@ -1,22 +1,25 @@
 export enum AppRoute {
+    //AUTH
     AUTH = 'Auth',
     SIGN_IN = 'Sign In',
     SIGN_UP = 'Sign Up',
     RESET_PASSWORD = 'Reset Passrord',
+
+    //HOME
     HOME = 'Home',
     MAIN = 'Main',
     ORDER_HISTORY = 'Order History',
     SETTINGS = 'Settings',
+
+    //BEER
     BEER_LIST = 'Beer List',
     BEER_DETAILS = 'Beer Details',
     ADMIN = 'Admin',
-    TODO = 'ToDo',
-    TODO_IN_PROGRESS = 'ToDo In Progress',
-    TODO_DONE = 'ToDo Done',
-    TODO_DETAILS = 'ToDo Details',
-    PROFILE = 'Profile',
-    ABOUT = 'About',
 
+    //ORDER
+    ORDER = 'Order',
+
+    //ADMIN
     ADMIN_DASHBOARD = 'Dashboard',
     ADMIN_BEER_LIST = 'Beer List',
     ADMIN_BEER_DETAILS = 'Beer Details',

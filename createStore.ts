@@ -19,7 +19,7 @@ const persistConfig = {
     // Whitelist (Save Specific Reducers)
     //whitelist: ['authReducer'],
     // Blacklist (Don't Save Specific Reducers)
-    blacklist: ['checkoutReducer'],
+    blacklist: ['checkoutReducer', 'beerReducer'],
 };
 
 const rootReducer = combineReducers({

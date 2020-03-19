@@ -100,7 +100,7 @@ export const Checkout = props => {
         return (<FlexBox row justifyend aligncenter style={themedStyle.header}>
             <FlexBox style={themedStyle.total} row justifybetween aligncenter>
                 <Text category="s2" appearance="alternative">
-                    {count}
+                    {count} Barrels
                 </Text>
             </FlexBox>
             <Button size="large" style={themedStyle.reviewBtn} onPress={openCheckout}>

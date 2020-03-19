@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Layout, Text, Button } from '@ui-kitten/components';
+import React from 'react';
+import { Layout, Text, } from '@ui-kitten/components';
 import { FlexBox, Badge, NumberPicker, Spacer } from '../../components';
 import { View, TouchableWithoutFeedback } from 'react-native';
 
@@ -10,6 +10,8 @@ export const BeerItem = props => {
         props.addBeerToOrder(beer, quantity);
     }
 
+    const style = props.styles.find(s => s.id == beer.style);
+
     return (
         <View>
             <FlexBox row aligncenter style={themedStyle.container}>
@@ -19,9 +21,8 @@ export const BeerItem = props => {
                             <FlexBox
                                 row
                                 justifybetween
-                                alignstart
+                                alignstartx
                                 style={themedStyle.content}
-
                             >
                                 <FlexBox>
                                     <Text category="s1">{beer.name}</Text>
@@ -35,7 +36,7 @@ export const BeerItem = props => {
                             </FlexBox>
                             <Spacer height={1.5}></Spacer>
                             <FlexBox row>
-                                <Badge color={'#2176AC'}>{beer.style_temp}</Badge>
+                                <Badge color={'#2176AC'}>{style && style.style}</Badge>
                                 <Spacer width={.5}></Spacer>
                                 <Badge>IBU {beer.ibu}</Badge>
                                 <Spacer width={.5}></Spacer>

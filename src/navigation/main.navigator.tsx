@@ -4,6 +4,7 @@ import { AppRoute } from './app-routes';
 import { BeerDetails } from '../beer/beer-details';
 import { BeerList } from '../beer/beer-list';
 import { Home } from '../home';
+import { Order } from '../order';
 import { Settings } from '../settings';
 import { AdminNavigator } from './admin.navigator';
 
@@ -16,5 +17,6 @@ export const MainNavigator = (): React.ReactElement => (
         <Stack.Screen name={AppRoute.SETTINGS} component={Settings} />
         <Stack.Screen name={AppRoute.BEER_DETAILS} component={BeerDetails} />
         <Stack.Screen name={AppRoute.ADMIN} component={AdminNavigator} />
+        <Stack.Screen name={AppRoute.ORDER} component={Order} />
     </Stack.Navigator>
 );
