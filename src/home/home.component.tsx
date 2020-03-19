@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import {
     Text,
-    Button,
     Layout,
-    Icon,
     TopNavigationAction,
 } from '@ui-kitten/components';
 import { MainLayout } from '../layout';

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { BeerItem } from '../beer-item';
-import firebase from 'firebase';
-import '@firebase/firestore';
 import { AppRoute } from '../../navigation/app-routes';
 import { useNavigation } from '@react-navigation/native';
 import { Text } from '@ui-kitten/components'
@@ -32,6 +30,7 @@ export const BeerList = props => {
         }
         return (
             <BeerItem
+                quantity={beer.quantity}
                 key={beer.id}
                 onSelect={() => navigateToBeer(beer)}
                 beer={{ ...beer, checkoutQuantity }}

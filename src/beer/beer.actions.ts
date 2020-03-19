@@ -17,7 +17,7 @@ export const getBeers = () => async dispatch => {
                     quantity,
                     ibu,
                     abv,
-                    style_temp,
+                    style,
                 } = doc.data();
                 beers.push({
                     id: doc.id,
@@ -27,7 +27,7 @@ export const getBeers = () => async dispatch => {
                     quantity,
                     ibu,
                     abv,
-                    style_temp,
+                    style,
                 });
             });
             dispatch(getBeersSuccess(beers));

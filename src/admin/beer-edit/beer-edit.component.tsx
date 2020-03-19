@@ -7,20 +7,25 @@ import {
     Icon,
     Select,
 } from '@ui-kitten/components';
-import '@firebase/firestore';
 import moment from 'moment';
 import { useInput, useSelect } from '../../util/hooks';
 import { Spacer } from '../../components/spacer'
 import { SettingsIcon } from '../../assets/icons';
 
 export const BeerEdit = props => {
-    const { value: name, bind: bindName } = useInput('');
-    const { value: desc, bind: bindDesc } = useInput('');
-    const { value: price, bind: bindPrice } = useInput('');
-    const { value: ibu, bind: bindIbu } = useInput('');
-    const { value: abv, bind: bindAbv } = useInput('');
-    const { value: quantity, bind: bindQuantity } = useInput('');
-    const { value: style, bind: bindStyle } = useSelect(null);
+    const { beer = null } = props.route.params;
+
+
+    const initialStyle = props.styles.find(s => beer && s.id == beer.style);
+
+
+    const { value: name, bind: bindName } = useInput(beer ? beer.name : '');
+    const { value: desc, bind: bindDesc } = useInput(beer ? beer.description : '');
+    const { value: price, bind: bindPrice } = useInput(beer ? beer.price.toString() : '');
+    const { value: ibu, bind: bindIbu } = useInput(beer ? beer.ibu.toString() : '');
+    const { value: abv, bind: bindAbv } = useInput(beer ? beer.abv.toString() : '');
+    const { value: quantity, bind: bindQuantity } = useInput(beer ? beer.quantity.toString() : '');
+    const { value: style, bind: bindStyle } = useSelect(initialStyle ? { text: initialStyle.style, id: initialStyle.id } : '');
 
     const availableDateRef = useRef(null);
     const expireDateRef = useRef(null);
@@ -31,10 +36,15 @@ export const BeerEdit = props => {
     );
 
     useEffect(() => {
-        props.getBeerStyles();
+        if (props.styles.length == 0) {
+            props.getBeerStyles();
+        }
+
     }, [])
 
     const createBeer = () => {
+        //validate first
+
         props.addBeer({
             name: name,
             description: desc,
