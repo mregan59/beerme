@@ -5,7 +5,7 @@ import {
     removeBeerFromOrder,
     confirmOrder,
     clearOrder,
-} from './checkout.actions';
+} from '../store';
 
 const mapStateToProps = state => {
     return state.checkoutReducer;

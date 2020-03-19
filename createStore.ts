@@ -1,7 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { adminReducer } from './src/admin';
-import { beerReducer } from './src/beer';
-import { checkoutReducer } from './src/checkout';
+import { adminReducer, beerReducer, checkoutReducer } from './src/store';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native';

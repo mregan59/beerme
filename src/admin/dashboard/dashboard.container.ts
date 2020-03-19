@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ThemedDashboard } from './dashboard.styles';
-import { getBeers } from './../../beer/beer.actions';
+import { getBeers } from '../../store';
 
 const mapStateToProps = state => {
     return state.beerReducer;
