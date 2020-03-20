@@ -1,5 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
-import { adminReducer, beerReducer, checkoutReducer } from './src/store';
+import {
+    adminReducer,
+    beerReducer,
+    checkoutReducer,
+    ordersReducer,
+} from './src/store';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { AsyncStorage } from 'react-native';
@@ -17,13 +22,14 @@ const persistConfig = {
     // Whitelist (Save Specific Reducers)
     //whitelist: ['authReducer'],
     // Blacklist (Don't Save Specific Reducers)
-    blacklist: ['checkoutReducer', 'beerReducer'],
+    blacklist: ['checkoutReducer', 'beerReducer', 'ordersReducer'],
 };
 
 const rootReducer = combineReducers({
     adminReducer,
     beerReducer,
     checkoutReducer,
+    ordersReducer,
 });
 
 // Middleware: Redux Persist Persisted Reducer

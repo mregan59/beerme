@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import {
     Text,
@@ -15,6 +15,10 @@ import { Spacer, Calendar, FlexBox } from '../components';
 import moment from 'moment';
 
 export const Home = props => {
+
+    useEffect(() => {
+        props.getOrders();
+    }, [])
     const { themedStyle } = props;
     const navigateToSettings = () => {
         props.navigation.navigate(AppRoute.SETTINGS);
@@ -39,6 +43,17 @@ export const Home = props => {
         );
     };
 
+    const orders = props.orders.map(order => {
+        console.log(order);
+        return (<FlexBox style={themedStyle.order}>
+            <Text>{order.brewery}</Text>
+            <Text>${order.total}</Text>
+            <Text>{moment(order.delivery_date).format('MMM DD, YYYY')}</Text>
+            <Text>{Object.keys(order.beers).length} barrels</Text>
+
+        </FlexBox>)
+    })
+
 
     return (
         <View style={themedStyle.container}>
@@ -55,10 +70,9 @@ export const Home = props => {
                     <ScrollView style={themedStyle.container}>
                         <FlexBox justifybetween >
                             <Text category="h1" appearance="hint">Orders</Text>
-
+                            {orders}
                         </FlexBox>
-                        <Spacer height={2}></Spacer>
-                        <Text category="c2" >Other Stuff</Text>
+
                         <Button onPress={navigateToOrder}>Start Order</Button>
 
                     </ScrollView>

@@ -8,4 +8,10 @@ export const ThemedHome = withStyles(Home, theme => ({
         width: '100%',
         height: '100%',
     },
+    order: {
+        borderWidth: 1,
+        borderColor: 'hotpink',
+        padding: 20,
+        margin: 8,
+    }
 }));
