@@ -1,15 +1,38 @@
 import React from 'react';
 import { MainLayout } from '../../layout';
 import { Text } from '@ui-kitten/components';
+import { FlexBox } from '../../components';
+
+const BeerInfo = ({ content, style }) => {
+    return (
+        <FlexBox style={style.badgeContainer}>
+            <FlexBox justifycenter aligncenter flex1 style={style.badge}>
+                <Text category="h6" appearance="alternative">{content.info}</Text>
+                <Text category="c2" appearance="alternative">{content.descriptor}</Text>
+            </FlexBox>
+        </FlexBox>
+    )
+}
 
 export const BeerDetails = props => {
     const { beer } = props.route.params;
+    const { themedStyle } = props;
 
     return (
-        <MainLayout {...props} showBack padding level="2" title={beer.name}>
-            <Text>{beer.description}</Text>
-            <Text>{beer.quantity}</Text>
-            <Text>{beer.price}</Text>
+        <MainLayout padding={null} level="0" {...props} showBack showTitle={false} title={beer.name}>
+            <FlexBox style={themedStyle.container}>
+                <Text category="h2">{beer.name}</Text>
+                <Text appearance="hint" category="p1" >{beer.description}</Text>
+            </FlexBox>
+
+            <FlexBox flex1 row justifycenter>
+                <BeerInfo style={themedStyle} content={{ info: beer.quantity, descriptor: 'kegs' }}></BeerInfo>
+                <BeerInfo style={themedStyle} content={{ info: `$${beer.price}`, descriptor: 'per keg' }}></BeerInfo>
+                <BeerInfo style={themedStyle} content={{ info: beer.ibu, descriptor: 'IBU' }}></BeerInfo>
+                <BeerInfo style={themedStyle} content={{ info: beer.abv, descriptor: 'ABV' }}></BeerInfo>
+            </FlexBox>
+
         </MainLayout>
     );
 };
+

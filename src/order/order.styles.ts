@@ -5,13 +5,11 @@ import { Order } from './order.component';
 export const ThemedOrder = withStyles(Order, theme => ({
     dateContainer: {
         backgroundColor: theme['color-basic-100'],
-        // padding: variables.sideMargin,
         borderRadius: variables.borderRadius3,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         paddingTop: spacing(4),
         paddingBottom: spacing(6),
-        //marginBottom: 5,
     },
     container: {
         flex: 1,
@@ -28,8 +26,6 @@ export const ThemedOrder = withStyles(Order, theme => ({
     },
     content: {
         backgroundColor: theme['color-primary-focus'],
-        // height: '100%',
-        //alignItems: 'center',
         height: 450,
         overflow: 'visible',
         width: dimensions.fullWidth,

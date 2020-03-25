@@ -21,7 +21,7 @@ export const BeerItem = props => {
                             <FlexBox
                                 row
                                 justifybetween
-                                alignstartx
+                                alignstart
                                 style={themedStyle.content}
                             >
                                 <FlexBox>

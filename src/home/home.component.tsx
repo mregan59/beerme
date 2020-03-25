@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ScrollView } from 'react-native';
 import {
     Text,
     Layout,
     TopNavigationAction,
-    Button
+    Button,
 } from '@ui-kitten/components';
 import { MainLayout } from '../layout';
 import { AppRoute } from '../navigation/app-routes';
-import { BeerList } from '../beer/beer-list';
-import { Checkout } from '../checkout';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
-import { Spacer, Calendar, FlexBox } from '../components';
+import { FlexBox } from '../components';
 import moment from 'moment';
+import Swiper from 'react-native-snap-carousel';
+import { dimensions } from '../shared/variables'
 
 export const Home = props => {
 
     useEffect(() => {
         props.getOrders();
     }, [])
+
     const { themedStyle } = props;
+
     const navigateToSettings = () => {
         props.navigation.navigate(AppRoute.SETTINGS);
     };
+
     const navigateToAdmin = () => {
         props.navigation.navigate(AppRoute.ADMIN);
     };
+
     const navigateToOrder = () => {
         props.navigation.navigate(AppRoute.ORDER);
     };
+
     const renderRightControl = () => {
         return (
             <TopNavigationAction
@@ -45,14 +50,16 @@ export const Home = props => {
 
     const orders = props.orders.map(order => {
         console.log(order);
-        return (<FlexBox style={themedStyle.order}>
-            <Text>{order.brewery}</Text>
-            <Text>${order.total}</Text>
-            <Text>{moment(order.delivery_date).format('MMM DD, YYYY')}</Text>
-            <Text>{Object.keys(order.beers).length} barrels</Text>
-
-        </FlexBox>)
+        return (
+            <Layout level="3" style={themedStyle.order}>
+                <Text>{order.brewery}</Text>
+                <Text>${order.total}</Text>
+                <Text>{moment(order.delivery_date).format('MMM DD, YYYY')}</Text>
+                <Text>{Object.keys(order.beers).length} barrels</Text>
+            </Layout>
+        )
     })
+
 
 
     return (
@@ -66,16 +73,13 @@ export const Home = props => {
                 leftControl={renderLeftControl}
                 {...props}
             >
+
                 <Layout level="1" style={themedStyle.container}>
-                    <ScrollView style={themedStyle.container}>
-                        <FlexBox justifybetween >
-                            <Text category="h1" appearance="hint">Orders</Text>
-                            {orders}
-                        </FlexBox>
-
-                        <Button onPress={navigateToOrder}>Start Order</Button>
-
+                    <Text category="h1" appearance="hint">Orders</Text>
+                    <ScrollView horizontal style={themedStyle.slider}>
+                        {orders}
                     </ScrollView>
+                    <Button onPress={navigateToOrder}>Start Order</Button>
                 </Layout>
             </MainLayout>
         </View>

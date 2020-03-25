@@ -1,1 +1,1 @@
-export { BeerDetails } from './beer-details.component';
+export { ThemedBeerDetails as BeerDetails } from './beer-details.styles';
