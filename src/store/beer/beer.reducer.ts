@@ -1,7 +1,7 @@
 const initialState = {
     loading: false,
     beers: [],
-    styles: [],
+    styles: null,
 };
 
 export function beerReducer(state = initialState, action) {

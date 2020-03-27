@@ -30,6 +30,7 @@ export const BottomTabs = (props): SafeAreaLayoutElement => {
 
     return (
         <SafeAreaLayout insets={SaveAreaInset.BOTTOM}>
+            <Divider />
             <BottomNavigation
                 appearance="noIndicator"
                 selectedIndex={props.state.index}
@@ -37,7 +38,7 @@ export const BottomTabs = (props): SafeAreaLayoutElement => {
             >
                 {props.state.routes.map(createNavigationTabForRoute)}
             </BottomNavigation>
-            <Divider />
+
         </SafeAreaLayout>
     );
 };

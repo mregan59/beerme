@@ -20,7 +20,12 @@ import { BackIcon } from '../assets/icons';
 export const MainLayout = props => {
     const statusBarHeight = getStatusBarHeight();
     const navigateBack = () => {
-        props.navigation.goBack();
+        if (props.onBack) {
+            props.onBack()
+        } else {
+            props.navigation.goBack();
+        }
+
     };
     //TODO hook up navigation options
     // const { options } = scene.descriptor;
@@ -51,14 +56,19 @@ export const MainLayout = props => {
         );
     };
 
+    //TODO figure out way around tabPAdding
+
+
     if (props.safeArea) {
+        const insets = props.tabPadding
+            ? [SaveAreaInset.TOP, SaveAreaInset.BOTTOM, SaveAreaInset.TABS]
+            : [SaveAreaInset.TOP, SaveAreaInset.BOTTOM]
         return (
-            <SafeAreaLayout insets={[SaveAreaInset.TOP, SaveAreaInset.BOTTOM]}>
+            <SafeAreaLayout insets={insets}>
                 {props.showHeader && header()}
                 <Layout
                     level={props.level}
                     style={{
-                        flex: 1,
                         height: '100%',
                         padding: props.padding ? variables.sideMargin : 0,
                     }}
@@ -78,7 +88,6 @@ export const MainLayout = props => {
                 <Layout
                     level={props.level}
                     style={{
-                        flex: 1,
                         height: '100%',
                         padding: props.padding ? 15 : 0,
                     }}

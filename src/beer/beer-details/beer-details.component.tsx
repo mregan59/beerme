@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainLayout } from '../../layout';
-import { Text } from '@ui-kitten/components';
+import { Text, Button } from '@ui-kitten/components';
 import { FlexBox } from '../../components';
 
 const BeerInfo = ({ content, style }) => {
@@ -22,15 +22,22 @@ export const BeerDetails = props => {
         <MainLayout padding={null} level="0" {...props} showBack showTitle={false} title={beer.name}>
             <FlexBox style={themedStyle.container}>
                 <Text category="h2">{beer.name}</Text>
-                <Text appearance="hint" category="p1" >{beer.description}</Text>
+                <Text category="h6">{beer.style_name}</Text>
+
             </FlexBox>
 
-            <FlexBox flex1 row justifycenter>
+            <FlexBox row justifycenter>
                 <BeerInfo style={themedStyle} content={{ info: beer.quantity, descriptor: 'kegs' }}></BeerInfo>
                 <BeerInfo style={themedStyle} content={{ info: `$${beer.price}`, descriptor: 'per keg' }}></BeerInfo>
                 <BeerInfo style={themedStyle} content={{ info: beer.ibu, descriptor: 'IBU' }}></BeerInfo>
                 <BeerInfo style={themedStyle} content={{ info: beer.abv, descriptor: 'ABV' }}></BeerInfo>
             </FlexBox>
+            <FlexBox style={themedStyle.container}>
+                <Text category="label" >Description</Text>
+                <Text appearance="hint" category="p1" >{beer.description}</Text>
+                <Button>Add to Cart</Button>
+            </FlexBox>
+
 
         </MainLayout>
     );

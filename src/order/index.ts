@@ -1,1 +1,1 @@
-export { ThemedOrder as Order } from './order.styles';
+export { Order } from './order.container';

@@ -4,9 +4,7 @@ const initialState = {
     loading: false,
 
     order: {
-        delivery_date: moment()
-            .add(14)
-            .toDate(),
+        delivery_date: moment().add(14),
         brewery: 'Test Brewery',
         beers: {},
     },
@@ -58,6 +56,14 @@ export function checkoutReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: action.errors,
+            };
+        case 'SET_DELIVERY_DATE':
+            return {
+                ...state,
+                order: {
+                    ...state.order,
+                    delivery_date: action.date,
+                },
             };
         case 'CLEAR_ORDER':
             return {

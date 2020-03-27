@@ -42,9 +42,7 @@ exports.onItemCreation = functions.firestore
                         '<br/><br/> The total is $' +
                         data.total +
                         ' to be delivered on ' +
-                        moment(data.delivery_date.toDate).format(
-                            'MMM DD, YYYY'
-                        ) +
+                        moment(data.delivery_date).format('MMM DD, YYYY') +
                         '.',
                 },
             })

@@ -10,13 +10,9 @@ import { AdminNavigator } from './admin.navigator';
 
 const Stack = createStackNavigator();
 
-export const MainNavigator = (): React.ReactElement => (
+export const HomeNavigator = (): React.ReactElement => (
     <Stack.Navigator headerMode="none">
         <Stack.Screen name={AppRoute.HOME} component={Home} />
-        <Stack.Screen name={AppRoute.BEER_LIST} component={BeerList} />
-        <Stack.Screen name={AppRoute.SETTINGS} component={Settings} />
-        <Stack.Screen name={AppRoute.BEER_DETAILS} component={BeerDetails} />
         <Stack.Screen name={AppRoute.ADMIN} component={AdminNavigator} />
-        <Stack.Screen name={AppRoute.ORDER} component={Order} />
     </Stack.Navigator>
 );

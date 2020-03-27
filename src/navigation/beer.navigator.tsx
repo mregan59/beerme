@@ -9,8 +9,6 @@ const Stack = createStackNavigator();
 
 export const BeerNavigator = (): React.ReactElement => (
     <Stack.Navigator headerMode="none">
-        <Stack.Screen name={AppRoute.HOME} component={Home} />
-        <Stack.Screen name={AppRoute.BEER_LIST} component={BeerList} />
         <Stack.Screen name={AppRoute.BEER_DETAILS} component={BeerDetails} />
     </Stack.Navigator>
 );

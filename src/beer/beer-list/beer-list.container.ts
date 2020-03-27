@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ThemedBeerList as BeerListComponent } from './beer-list.styles';
-import { getBeers, getBeerStyles } from '../../store';
+import { getBeers } from '../../store';
 
 const mapStateToProps = state => {
     return { ...state.beerReducer, ...state.checkoutReducer };
@@ -8,5 +8,5 @@ const mapStateToProps = state => {
 
 export const BeerList = connect(mapStateToProps, {
     getBeers,
-    getBeerStyles,
+    //getBeerStyles,
 })(BeerListComponent);

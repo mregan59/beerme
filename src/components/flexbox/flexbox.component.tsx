@@ -28,6 +28,7 @@ export const FlexBox = props => {
         flexWrap: props.wrap && 'wrap',
         flex: props.flex1 && 1,
         width: props.w100 && '100%',
+        height: props.h100 && '100%',
     };
     var {
         row,
@@ -49,6 +50,7 @@ export const FlexBox = props => {
         flex1,
         wrap,
         w100,
+        h100,
         ...other
     } = props;
     //TODO figure out way to pass in element
@@ -93,6 +95,7 @@ export const TouchableFlexBox = props => {
         flexWrap: props.wrap && 'wrap',
         flex: props.flex1 && 1,
         width: props.w100 && '100%',
+        height: props.h100 && '100%',
         ...props.style,
     };
     var {

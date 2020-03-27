@@ -37,7 +37,7 @@ export const BeerEdit = props => {
 
     useEffect(() => {
         if (props.styles.length == 0) {
-            props.getBeerStyles();
+            // props.getBeerStyles();
         }
 
     }, [])

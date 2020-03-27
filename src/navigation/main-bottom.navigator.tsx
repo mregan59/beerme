@@ -5,13 +5,13 @@ import { AppRoute } from './app-routes';
 import { Home } from '../home';
 import { Settings } from '../settings';
 import { OrderHistory } from '../order-history';
-import { LayoutIcon, PersonIcon } from '../assets/icons';
+import { LayoutIcon, PersonIcon, PlusIcon } from '../assets/icons';
 import { BottomTabs } from './bottom-tabs';
-import { BeerNavigator } from './beer.navigator';
+import { HomeNavigator } from './home.navigator';
 
 const BottomTab = createBottomTabNavigator();
 
-export const MainNavigator = (): React.ReactElement => (
+export const MainBottomNavigator = (): React.ReactElement => (
     <BottomTab.Navigator tabBar={props => <BottomTabs {...props} />}>
         <BottomTab.Screen
             name={AppRoute.ORDER_HISTORY}
@@ -20,8 +20,8 @@ export const MainNavigator = (): React.ReactElement => (
         />
         <BottomTab.Screen
             name={AppRoute.HOME}
-            component={BeerNavigator}
-            options={{ title: 'Beer', tabBarIcon: PersonIcon }}
+            component={HomeNavigator}
+            options={{ title: 'Beer', tabBarIcon: PlusIcon }}
         />
         <BottomTab.Screen
             name={AppRoute.SETTINGS}

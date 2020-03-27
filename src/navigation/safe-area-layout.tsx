@@ -7,7 +7,10 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 export enum SaveAreaInset {
     TOP = 'top',
     BOTTOM = 'bottom',
+    TABS = 'tabs',
 }
+
+const { height, width } = Dimensions.get('window');
 
 type InsetsProp = SaveAreaInset | SaveAreaInset[];
 
@@ -22,22 +25,30 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
 
     const { insets, style, ...layoutProps } = props;
 
-    const toStyleProp = (inset: SaveAreaInset): ViewStyle => {
-        switch (inset) {
-            case SaveAreaInset.BOTTOM:
-                return { paddingBottom: safeAreaInsets.bottom };
-            case SaveAreaInset.TOP:
-                // const paddingTop =
-                //     Platform.OS === 'android'
-                //         ? getStatusBarHeight()
-                //         : safeAreaInsets.top;
-                return { paddingTop: safeAreaInsets.top };
-        }
-    };
-
-    const createInsets = (): StyleProp<ViewStyle> => {
+    const createInsets = () => {
         // @ts-ignore
-        return React.Children.map(insets, toStyleProp);
+        let style = { paddingBottom: 0, paddingTop: 0 };
+        console.log(insets);
+        React.Children.forEach(insets, inset => {
+            switch (inset) {
+                case SaveAreaInset.BOTTOM:
+                    style = { ...style, paddingBottom: style.paddingBottom + safeAreaInsets.bottom }
+                    return;
+                case SaveAreaInset.TOP:
+                    // const paddingTop =
+                    //     Platform.OS === 'android'
+                    //         ? getStatusBarHeight()
+                    //         : safeAreaInsets.top;
+                    style = { ...style, paddingTop: safeAreaInsets.top }
+                    return
+                case SaveAreaInset.TABS:
+                    style = { ...style, paddingBottom: style.paddingBottom + 78 }
+                    return
+
+            }
+        });
+        return style;
+        //return React.Children.map(insets, toStyleProp);
     };
 
     return (
@@ -46,7 +57,7 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
             style={[
                 style,
                 createInsets(),
-                { flex: 1 }, //if set this to windowHeight checkout won't show
+                { backgroundColor: 'hotpink', }, //if set this to windowHeight checkout won't show
             ]}
         />
     );

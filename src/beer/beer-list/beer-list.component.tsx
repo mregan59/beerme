@@ -11,10 +11,13 @@ export const BeerList = props => {
     const { themedStyle } = props;
 
     useEffect(() => {
-        props.getBeers()
-        if (props.styles.length == 0) {
-            props.getBeerStyles()
+        if (props.beers.length == 0) {
+            props.getBeers()
         }
+
+        // if (props.styles.length == 0) {
+        //      props.getBeerStyles()
+        // }
 
     }, []);
 

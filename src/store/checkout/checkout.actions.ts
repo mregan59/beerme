@@ -34,6 +34,17 @@ const clearOrderAction = () => {
     };
 };
 
+export const setDeliveryDate = date => async dispatch => {
+    dispatch(setDeliveryDateAction(date));
+};
+
+const setDeliveryDateAction = date => {
+    return {
+        type: 'SET_DELLIVERY_DATE',
+        date,
+    };
+};
+
 export const confirmOrder = order => async dispatch => {
     const ordersRef = firebase.firestore().collection('orders');
     dispatch(confirmOrderRequested());

@@ -10,8 +10,6 @@ export const BeerItem = props => {
         props.addBeerToOrder(beer, quantity);
     }
 
-    const style = props.styles.find(s => s.id == beer.style);
-
     return (
         <View>
             <FlexBox row aligncenter style={themedStyle.container}>
@@ -36,7 +34,7 @@ export const BeerItem = props => {
                             </FlexBox>
                             <Spacer height={1.5}></Spacer>
                             <FlexBox row>
-                                <Badge color={'#2176AC'}>{style && style.style}</Badge>
+                                <Badge color={'#2176AC'}>{beer.style_name}</Badge>
                                 <Spacer width={.5}></Spacer>
                                 <Badge>IBU {beer.ibu}</Badge>
                                 <Spacer width={.5}></Spacer>

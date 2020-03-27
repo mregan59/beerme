@@ -3,21 +3,57 @@ import { View, ScrollView } from 'react-native';
 import {
     Text,
     Layout,
+    Modal,
+    Button
 } from '@ui-kitten/components';
 import { MainLayout } from '../layout';
 import { BeerList } from '../beer/beer-list';
 import { Checkout } from '../checkout';
 import { Spacer, Calendar, FlexBox } from '../components';
 import moment from 'moment';
+import { AppRoute } from '../navigation/app-routes';
 
 export const Order = props => {
 
-    const [deliveryDate, setDeliveryDate] = useState(moment().add(7, 'day'));
+    //const [deliveryDate, setDeliveryDate] = useState(moment().add(7, 'day'));
     const { themedStyle } = props;
+
+    const [visible, setVisible] = useState(false);
+
+    const toggleModal = () => {
+        setVisible(!visible);
+    };
 
     // const editDate = () => {
     //yeah lets make this its own control
     // };
+
+    const onBack = () => {
+        toggleModal()
+
+
+    }
+
+    const cancel = () => {
+        toggleModal();
+
+    }
+    const discardOrder = () => {
+        toggleModal();
+        //props.clearOrder
+        props.navigation.navigate(AppRoute.HOME)
+    }
+
+    const renderModalElement = () => (
+        <Layout
+            level='3'
+            style={themedStyle.modalContainer}>
+            <Text>Are you sure you want to discard this order?</Text>
+            <Button status="warning" onPress={cancel}>Cancel</Button>
+            <Button status="primary" onPress={discardOrder}>Discard</Button>
+
+        </Layout>
+    );
 
     return (
         <View style={themedStyle.container}>
@@ -26,23 +62,23 @@ export const Order = props => {
                 padding={null}
                 title='Order'
                 showBack
+                onBack={onBack}
                 {...props}
             >
-                <Layout level="3">
+                <Layout style={{ backgroundColor: 'green', height: ' 100%', flex: .9 }} level="3">
                     <ScrollView>
-                        <FlexBox justifybetween style={themedStyle.dateContainer}>
-                            <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Delivery Date</Text>
-                            <Text style={themedStyle.dateText} category="h5">{deliveryDate.format('dddd, MMM DD, YYYY')}</Text>
-                            <Spacer height={2}></Spacer>
-                            <Calendar currentDate={deliveryDate} onSelect={date => setDeliveryDate(date)}></Calendar>
-                        </FlexBox>
-                        <Spacer height={2}></Spacer>
-                        <Text style={themedStyle.dateText} category="c2" appearance="hint">Select your Beers</Text>
                         <BeerList></BeerList>
                     </ScrollView>
                 </Layout>
+                <Checkout></Checkout>
+                <Modal
+                    backdropStyle={themedStyle.backdrop}
+                    onBackdropPress={toggleModal}
+                    visible={visible}>
+                    {renderModalElement()}
+                </Modal>
             </MainLayout>
-            <Checkout></Checkout>
+
         </View>
     );
 };

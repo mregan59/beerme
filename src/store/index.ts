@@ -10,6 +10,7 @@ export {
     removeBeerFromOrder,
     clearOrder,
     confirmOrder,
+    setDeliveryDate,
 } from './checkout/checkout.actions';
 export { addBeer, getBeerStyles, getBeers } from './beer/beer.actions';
 export { getOrders } from './orders/orders.actions';

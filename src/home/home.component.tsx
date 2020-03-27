@@ -11,20 +11,16 @@ import { AppRoute } from '../navigation/app-routes';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
 import { FlexBox } from '../components';
 import moment from 'moment';
-import Swiper from 'react-native-snap-carousel';
-import { dimensions } from '../shared/variables'
 
 export const Home = props => {
 
     useEffect(() => {
-        props.getOrders();
+        if (props.orders.length == 0) {
+            props.getOrders();
+        }
     }, [])
 
     const { themedStyle } = props;
-
-    const navigateToSettings = () => {
-        props.navigation.navigate(AppRoute.SETTINGS);
-    };
 
     const navigateToAdmin = () => {
         props.navigation.navigate(AppRoute.ADMIN);
@@ -37,16 +33,12 @@ export const Home = props => {
     const renderRightControl = () => {
         return (
             <TopNavigationAction
-                onPress={navigateToSettings}
-                icon={SettingsIcon}
+                onPress={navigateToAdmin}
+                icon={PersonIcon}
             />
         );
     };
-    const renderLeftControl = () => {
-        return (
-            <TopNavigationAction onPress={navigateToAdmin} icon={PersonIcon} />
-        );
-    };
+
 
     const orders = props.orders.map(order => {
         console.log(order);
@@ -67,19 +59,23 @@ export const Home = props => {
             <MainLayout
                 safeArea={true}
                 padding={null}
+                tabPadding
                 showTitle={false}
-                showBack
                 rightControl={renderRightControl}
-                leftControl={renderLeftControl}
                 {...props}
             >
 
                 <Layout level="1" style={themedStyle.container}>
-                    <Text category="h1" appearance="hint">Orders</Text>
-                    <ScrollView horizontal style={themedStyle.slider}>
-                        {orders}
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <FlexBox column justifybetween h100 flex1 style={{ backgroundColor: 'orange' }}>
+                            <Text category="h1" appearance="hint">Orders</Text>
+
+                            <ScrollView horizontal style={themedStyle.slider}>
+                                {orders}
+                            </ScrollView>
+                            <Button onPress={navigateToOrder}>Start Order</Button>
+                        </FlexBox>
                     </ScrollView>
-                    <Button onPress={navigateToOrder}>Start Order</Button>
                 </Layout>
             </MainLayout>
         </View>

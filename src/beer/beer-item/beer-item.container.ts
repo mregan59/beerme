@@ -3,7 +3,7 @@ import { ThemedBeerItem as BeerItemComponent } from './beer-item.styles';
 import { addBeerToOrder } from '../../store';
 
 const mapStateToProps = state => {
-    return { styles: state.beerReducer.styles };
+    return {};
 };
 
 export const BeerItem = connect(mapStateToProps, {

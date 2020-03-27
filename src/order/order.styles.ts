@@ -46,4 +46,13 @@ export const ThemedOrder = withStyles(Order, theme => ({
     dateText: {
         marginLeft: spacing(2),
     },
+    modalContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 256,
+        padding: 16,
+    },
+    backdrop: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
 }));

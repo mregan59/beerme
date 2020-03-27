@@ -1,11 +1,15 @@
 import firebase from 'firebase';
 import '@firebase/firestore';
 
-export const getBeers = () => async dispatch => {
+export const getBeers = () => async (dispatch, getState) => {
     const beersRef = firebase.firestore().collection('beers');
+    if (!getState().beerReducer.styles) {
+        await dispatch(getBeerStyles());
+    }
+    let styles = getState().beerReducer.styles;
     dispatch(getBeersRequested());
 
-    beersRef
+    return beersRef
         .get()
         .then(querySnapshot => {
             const beers = [];
@@ -28,6 +32,7 @@ export const getBeers = () => async dispatch => {
                     ibu,
                     abv,
                     style,
+                    style_name: styles[style].style,
                 });
             });
             dispatch(getBeersSuccess(beers));
@@ -61,16 +66,16 @@ export const getBeerStyles = () => async dispatch => {
     const beerStylesRef = firebase.firestore().collection('beer-styles');
     dispatch(getBeerStylesRequested());
 
-    beerStylesRef
+    return beerStylesRef
         .get()
         .then(querySnapshot => {
-            const beerStyles = [];
+            const beerStyles = {};
             querySnapshot.forEach(doc => {
                 const { style } = doc.data();
-                beerStyles.push({
+                beerStyles[doc.id] = {
                     id: doc.id,
                     style,
-                });
+                };
             });
             dispatch(getBeerStylesSuccess(beerStyles));
         })
@@ -103,8 +108,7 @@ export const addBeer = beer => async dispatch => {
     const beersRef = firebase.firestore().collection('beers');
     dispatch(addBeerRequested());
 
-    beersRef;
-    beersRef
+    return beersRef
         .add(beer)
         .then(() => {
             dispatch(addBeerSuccess());
