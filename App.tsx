@@ -38,7 +38,7 @@ export default function App(props) {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(user => {
-            setInitialRoute(user ? AppRoute.MAIN : AppRoute.MAIN);
+            setInitialRoute(user ? AppRoute.HOME : AppRoute.HOME);
         });
     }, []);
     return (

@@ -65,7 +65,7 @@ export const Order = props => {
                 onBack={onBack}
                 {...props}
             >
-                <Layout style={{ backgroundColor: 'green', height: ' 100%', flex: .9 }} level="3">
+                <Layout style={{ height: ' 100%', flex: .9 }} level="3">
                     <ScrollView>
                         <BeerList></BeerList>
                     </ScrollView>

@@ -9,7 +9,7 @@ import {
 import { MainLayout } from '../layout';
 import { AppRoute } from '../navigation/app-routes';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
-import { FlexBox } from '../components';
+import { FlexBox, Spacer } from '../components';
 import moment from 'moment';
 
 export const Home = props => {
@@ -42,12 +42,20 @@ export const Home = props => {
 
     const orders = props.orders.map(order => {
         console.log(order);
+        const beers = Object.keys(order.beers);
+        let quantity = 0;
+        beers.forEach(beer => {
+            quantity += order.beers[beer].checkoutQuantity;
+        })
+
         return (
             <Layout level="3" style={themedStyle.order}>
-                <Text>{order.brewery}</Text>
-                <Text>${order.total}</Text>
-                <Text>{moment(order.delivery_date).format('MMM DD, YYYY')}</Text>
-                <Text>{Object.keys(order.beers).length} barrels</Text>
+                <Text category="h6">{moment(order.delivery_date).format('MMM DD')}</Text>
+                <Spacer height=".5"></Spacer>
+                <FlexBox style={themedStyle.innerOrder}>
+                    <Text category="s2">{quantity} kegs</Text>
+                    <Text category="s2">{beers.length} Flavors</Text>
+                </FlexBox>
             </Layout>
         )
     })
@@ -66,16 +74,25 @@ export const Home = props => {
             >
 
                 <Layout level="1" style={themedStyle.container}>
-                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                        <FlexBox column justifybetween h100 flex1 style={{ backgroundColor: 'orange' }}>
-                            <Text category="h1" appearance="hint">Orders</Text>
+                    <ScrollView bounces={false} contentContainerStyle={{ flexGrow: 1 }}>
+                        <FlexBox column justifystart h100 flex1>
+                            <Text style={themedStyle.header} category="h6">Orders</Text>
+                            <Spacer height="1"></Spacer>
+                            <View>
+                                <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={themedStyle.slider}>
+                                    {orders}
+                                </ScrollView>
+                            </View>
+                            <Spacer height="3"></Spacer>
+                            <Text style={themedStyle.header} category="h6">Newest Beers</Text>
+                            <Spacer height="1"></Spacer>
 
-                            <ScrollView horizontal style={themedStyle.slider}>
-                                {orders}
-                            </ScrollView>
-                            <Button onPress={navigateToOrder}>Start Order</Button>
                         </FlexBox>
                     </ScrollView>
+                    <Button
+                        style={themedStyle.button}
+                        onPress={navigateToOrder}
+                    >Start Order</Button>
                 </Layout>
             </MainLayout>
         </View>

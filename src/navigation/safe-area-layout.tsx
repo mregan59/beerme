@@ -57,7 +57,7 @@ export const SafeAreaLayout = (props: SafeAreaLayoutProps): LayoutElement => {
             style={[
                 style,
                 createInsets(),
-                { backgroundColor: 'hotpink', }, //if set this to windowHeight checkout won't show
+                {}, //if set this to windowHeight checkout won't show
             ]}
         />
     );

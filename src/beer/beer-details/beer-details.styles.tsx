@@ -10,7 +10,6 @@ export const ThemedBeerDetails = withStyles(BeerDetails, theme => ({
         marginBottom: spacing(2)
     },
     badgeContainer: {
-        background: 'hotpink',
         width: badgeWidth,
         height: badgeWidth,
         padding: spacing(1)

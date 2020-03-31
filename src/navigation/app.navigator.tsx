@@ -4,6 +4,7 @@ import { AuthNavigator } from './auth.navigator';
 import { MainTopNavigator } from './main-top.navigator';
 import { MainBottomNavigator } from './main-bottom.navigator';
 import { OrderNavigator } from './order.navigator';
+import { HomeNavigator } from './home.navigator';
 import { BeerNavigator } from './beer.navigator';
 import { AppRoute } from './app-routes';
 import { BeerDetails } from '../beer/beer-details';
@@ -11,7 +12,7 @@ type StackNavigatorProps = React.ComponentProps<typeof Stack.Navigator>;
 
 export type AppNavigatorParams = {
     [AppRoute.AUTH]: undefined;
-    [AppRoute.MAIN]: undefined;
+    [AppRoute.HOME]: undefined;
     [AppRoute.ORDER]: undefined;
     [AppRoute.BEER_DETAILS]: undefined;
 };
@@ -23,7 +24,7 @@ export const AppNavigator = (
 ): React.ReactElement => (
         <Stack.Navigator {...props} headerMode="none">
             <Stack.Screen name={AppRoute.AUTH} component={AuthNavigator} />
-            <Stack.Screen name={AppRoute.MAIN} component={MainBottomNavigator} />
+            <Stack.Screen name={AppRoute.HOME} component={HomeNavigator} />
             <Stack.Screen name={AppRoute.ORDER} component={OrderNavigator} />
             <Stack.Screen name={AppRoute.BEER_DETAILS} component={BeerDetails} />
         </Stack.Navigator>
