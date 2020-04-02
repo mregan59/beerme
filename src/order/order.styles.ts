@@ -51,6 +51,7 @@ export const ThemedOrder = withStyles(Order, theme => ({
         alignItems: 'center',
         width: 256,
         padding: 16,
+        borderRadius: variables.borderRadius2,
     },
     backdrop: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',

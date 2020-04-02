@@ -1,7 +1,8 @@
 import React from 'react';
 import { Layout, Text, } from '@ui-kitten/components';
 import { FlexBox, Badge, NumberPicker, Spacer } from '../../components';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { PlusIcon } from '../../assets/icons';
 
 export const BeerItem = props => {
     const { beer, themedStyle, quantity = 1000 } = props;
@@ -26,15 +27,11 @@ export const BeerItem = props => {
                                     <Text category="s1">{beer.name}</Text>
                                     <Text appearance="hint" category="c1">Last delivered Oct 14, 2019</Text>
                                 </FlexBox>
-                                <Layout level="3" style={themedStyle.price}>
-                                    <Text category="s1">
-                                        ${beer.price}
-                                    </Text>
-                                </Layout>
+
                             </FlexBox>
                             <Spacer height={1.5}></Spacer>
                             <FlexBox row>
-                                <Badge color={'#2176AC'}>{beer.style_name}</Badge>
+                                <Badge color="basic">{beer.style_name}</Badge>
                                 <Spacer width={.5}></Spacer>
                                 <Badge>IBU {beer.ibu}</Badge>
                                 <Spacer width={.5}></Spacer>
@@ -43,11 +40,22 @@ export const BeerItem = props => {
                                 <Badge>{beer.quantity} barrels</Badge>
                             </FlexBox>
                         </FlexBox>
+                        <Layout level="3" style={themedStyle.price}>
+                            <Text appearance="alternative" category="s1">
+                                ${beer.price}
+                            </Text>
+                        </Layout>
+                        <TouchableOpacity style={themedStyle.addBtn}>
+                            <FlexBox flex1 justifycenter aligncenter>
+                                <PlusIcon style={themedStyle.addIcon} width={24}
+                                    height={24}></PlusIcon>
+                            </FlexBox>
+                        </TouchableOpacity>
                     </Layout>
                 </TouchableWithoutFeedback>
-                <View style={themedStyle.addContainer}>
+                {/* <View style={themedStyle.addContainer}>
                     <NumberPicker onChange={(value) => onAddBeer(beer, value)} value={beer.checkoutQuantity} max={quantity}></NumberPicker>
-                </View>
+                </View> */}
             </FlexBox>
         </View>
     );

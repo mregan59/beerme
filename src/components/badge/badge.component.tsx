@@ -7,7 +7,7 @@ export const Badge = props => {
 
     const { color, children, themedStyle } = props;
     return (
-        <FlexBox style={[themedStyle.container, color ? { backgroundColor: color } : themedStyle.outlined]}>
+        <FlexBox style={[themedStyle.container, color ? themedStyle[color] : themedStyle.outlined]}>
             <Text category="c1" appearance={color ? "alternative" : "default"}>{children}</Text>
         </FlexBox>
     )

@@ -9,7 +9,7 @@ import {
 import { MainLayout } from '../layout';
 import { BeerList } from '../beer/beer-list';
 import { Checkout } from '../checkout';
-import { Spacer, Calendar, FlexBox } from '../components';
+import { Spacer, Calendar, FlexBox, } from '../components';
 import moment from 'moment';
 import { AppRoute } from '../navigation/app-routes';
 
@@ -46,11 +46,17 @@ export const Order = props => {
 
     const renderModalElement = () => (
         <Layout
-            level='3'
+            level='1'
+            text
             style={themedStyle.modalContainer}>
-            <Text>Are you sure you want to discard this order?</Text>
-            <Button status="warning" onPress={cancel}>Cancel</Button>
-            <Button status="primary" onPress={discardOrder}>Discard</Button>
+            <Text category="p1">Are you sure you want to discard this order?</Text>
+            <Spacer height="2"></Spacer>
+            <FlexBox justifycenter aligncenter row>
+                <Button status="basic" onPress={cancel}>Keep it</Button>
+                <Spacer width="2"></Spacer>
+                <Button status="danger" onPress={discardOrder}>Discard</Button>
+            </FlexBox>
+
 
         </Layout>
     );

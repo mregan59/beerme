@@ -12,4 +12,16 @@ export const ThemedBadge = withStyles(Badge, theme => ({
         borderWidth: 1,
         borderColor: theme['color-basic-400'],
     },
+    primary: {
+        backgroundColor: theme['color-primary-500'],
+    },
+    info: {
+        backgroundColor: theme['color-info-600'],
+    },
+    success: {
+        backgroundColor: theme['color-success-600'],
+    },
+    basic: {
+        backgroundColor: theme['color-basic-600'],
+    },
 }));
