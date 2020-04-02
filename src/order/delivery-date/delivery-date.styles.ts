@@ -11,4 +11,5 @@ export const ThemedDeliveryDate = withStyles(DeliveryDate, theme => ({
         paddingTop: spacing(4),
         paddingBottom: spacing(6),
     },
+    container: { flex: 1, height: '100%', width: '100%' },
 }));

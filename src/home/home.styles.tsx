@@ -31,13 +31,5 @@ export const ThemedHome = withStyles(Home, theme => ({
     header: {
         paddingLeft: spacing(2)
     },
-    button: {
-        paddingBottom: 40,
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        left: 0,
-        paddingTop: 20,
-        borderRadius: '40rem',
-    }
+
 }));

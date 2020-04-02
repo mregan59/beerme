@@ -9,7 +9,7 @@ import {
 import { MainLayout } from '../layout';
 import { AppRoute } from '../navigation/app-routes';
 import { SettingsIcon, PersonIcon } from '../assets/icons';
-import { FlexBox, Spacer } from '../components';
+import { FlexBox, Spacer, BottomButton } from '../components';
 import moment from 'moment';
 
 export const Home = props => {
@@ -89,12 +89,12 @@ export const Home = props => {
 
                         </FlexBox>
                     </ScrollView>
-                    <Button
-                        style={themedStyle.button}
-                        onPress={navigateToOrder}
-                    >Start Order</Button>
                 </Layout>
             </MainLayout>
+            <BottomButton
+                style={themedStyle.button}
+                onPress={navigateToOrder}
+            >Start Order</BottomButton>
         </View>
     );
 };

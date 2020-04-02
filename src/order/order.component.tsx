@@ -60,7 +60,7 @@ export const Order = props => {
             <MainLayout
                 safeArea={true}
                 padding={null}
-                title='Order'
+                title='Add Beer'
                 showBack
                 onBack={onBack}
                 {...props}

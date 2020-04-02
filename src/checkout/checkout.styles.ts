@@ -12,8 +12,8 @@ export const ThemedCheckout = withStyles(Checkout, theme => ({
         height: 100,
         width: dimensions.fullWidth,
         padding: variables.sideMargin,
-        borderTopRightRadius: 35,
-        borderTopLeftRadius: 35,
+        // borderTopRightRadius: 35,
+        // borderTopLeftRadius: 35,
     },
     content: {
         backgroundColor: theme['color-primary-500'],
